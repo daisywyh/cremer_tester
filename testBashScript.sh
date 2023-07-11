@@ -19,17 +19,17 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 
 
 
-rule buildIndex:
-    input:
-        "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
-    params:
-        index_name=lambda w: {w.overall_pathway}
-    output:
-        join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
-    shell:
-        """
-        bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
-        """
+# rule buildIndex:
+#    input:
+#        "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+    # params:
+    #     index_name=lambda w: {w.overall_pathway}
+    # output:
+    #     join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
+    # shell:
+    #     """
+    #     bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
+    #     """
 
 
 
