@@ -1,23 +1,20 @@
-from os.path import join
-import os
+# rule prefetch:
+#     params:
+#         acc_num=lambda w: {w.read}
+#     output:
+#         join(config["sraRepo"],"{read}")
+#     shell:
+#         """
+#         prefetch {params.acc_num} -o {output}
+#         """
 
-rule prefetch:
-    params:
-        acc_num=lambda w: {w.read}
-    output:
-        join(config["sraRepo"],"{read}")
-    shell:
-        """
-        prefetch {params.acc_num} -o {output}
-        """
-
-rule dump:
-    input:
-        join(config["sraRepo"],"{read}")
-    output:
-        join(config["readsDir"],"{read}.fa")
-    shell:
-        "vdb-dump -f fasta {input} --output-file {output}"
+# rule dump:
+#     input:
+#         join(config["sraRepo"],"{read}")
+#     output:
+#         join(config["readsDir"],"{read}.fa")
+#     shell:
+#         "vdb-dump -f fasta {input} --output-file {output}"
 
 # i can't get the following two rules to work so i just compiled (cat) and ran the python code manually
 # rule combineCatalogues:
@@ -42,15 +39,25 @@ rule dump:
 #         python3 workflow/scripts/edit_catalog_id.py {input} {output}
 #         """
 
+# bug: overall_pathway == butyrate/butyrate
+# even bigger bug: this doesn't really work
+# fix: run the following command directly in the shell
+# awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
+'''
 rule removeGeneCatalogueDupicates:
     input:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs.fa"
+
     output:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+
     shell:
         """
-        awk'/^>/{f=!d[$1];d[$1]=1}f' {input} > {output}
+        awk '/^>/{f=!d[$1];d[$1]=1}f' {input} > {output}
         """
+        #awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
+'''
+
 
 rule buildIndex:
     input:
@@ -67,6 +74,7 @@ rule buildIndex:
 rule runBowtie:
     input:
         reads=join(config["readsDir"], "{read}.fa")
+        #reads = "workflow/out/scratch/reads/ERR525688.fa"
     output:
         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
     params:
@@ -96,9 +104,13 @@ rule summarizeHits:
         python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
         """
 
+# known issue
+# need to put in pathway_abundance for this to work
 rule compileSummaries:
     output:
-        "workflow/out/compiled_bt_hit_summaries.txt"
+        #"workflow/out/compiled_bt_hit_summaries.txt"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+
     params:
         dir = (join(config["hitSummaries"]))
     shell:
@@ -106,11 +118,19 @@ rule compileSummaries:
         for f in {params.dir}/*.json ; do cat $f ; done > {output}
         """
 
+
+# known bug
+# just forgot to put in the directory
+# this should be the correct version?
 rule writeSummaryCSV:
     input:
-        "workflow/out/compiled_bt_hit_summaries.txt"
+        #"workflow/out/compiled_bt_hit_summaries.txt"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+
     output:
-        "workflow/out/compiled_bt_hit_summaries.csv"
+        #"workflow/out/compiled_bt_hit_summaries.csv"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+
     shell:
         """
         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
@@ -137,12 +157,17 @@ rule compileReadCounts:
         for f in {params.dir}/*.txt ; do cat $f ; done > {output}
         """
 
+# known issue -> fix by putting correct filepath
 rule getGeneLengthsInCatalogue:
     input:
-        "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+       "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+
     output:
         "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
+
     shell:
+        # fixed this because it seems like it's the wrong filepath??
+        #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
         """
-        python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
+        python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
         """

@@ -1,8 +1,3 @@
-from os.path import join
-import os
-
-configfile: "../envs/prodigal.yml"
-
 rule nucProdigal:
     input:
         join(config["strainGenomeDir"],"{hit_strain}.fa")
