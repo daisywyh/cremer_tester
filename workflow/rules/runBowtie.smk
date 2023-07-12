@@ -59,6 +59,7 @@ rule dump:
 # '''
 
 
+# note: overall_pathway is still `butyrate/butyrate`
 rule buildIndex:
     input:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
@@ -74,14 +75,13 @@ rule buildIndex:
 rule runBowtie:
     input:
         reads=join(config["readsDir"], "{read}.fa")
-        #reads = "workflow/out/scratch/reads/ERR525688.fa"
     output:
         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
     params:
         index_name=lambda w: {w.overall_pathway}
     shell:
         """
-        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output} 
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/butyrate/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output} 
         """
 
 rule filterBowtieOutput:
