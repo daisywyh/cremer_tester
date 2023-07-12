@@ -75,18 +75,18 @@ rule buildIndex:
 
         """
 
-# rule runBowtie:
-#     input:
-#         reads=join(config["readsDir"], "{read}.fa")
-#     output:
-#         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-#     params:
-#         index_name=lambda w: {w.overall_pathway}
-#     shell:
-#         """
-#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output}
-#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/butyrate/butyrate_gene_catalogue.1.bt2 -f -U ERR525689.fa -S workflow/out/scratch/bt_output/butyrate/butyrate_ERR525689_bt.sam
-#         """
+rule runBowtie:
+    input:
+        reads=join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+    params:
+        index_name=lambda w: {w.overall_pathway}
+    shell:
+        """
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output}
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/butyrate/butyrate_gene_catalogue.1.bt2 -f -U ERR525689.fa -S workflow/out/scratch/bt_output/butyrate/butyrate_ERR525689_bt.sam
+        """
 
 # rule filterBowtieOutput:
 #     input:
