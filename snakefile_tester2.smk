@@ -23,9 +23,9 @@ rule all:
 
         # expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS),
 
-        # "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
-        # "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
-        # "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
+        "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
+        "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
+        "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
 
         # "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt"
         # "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
