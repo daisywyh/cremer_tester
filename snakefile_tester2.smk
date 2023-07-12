@@ -17,7 +17,7 @@ PATHWAY = ["butyrate_rerun"]
 OVERALL_PATHWAY = 'butyrate"'
 
 rule all:
-
+    input:
         "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
 
         join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
