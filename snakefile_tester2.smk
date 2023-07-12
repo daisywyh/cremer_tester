@@ -18,11 +18,16 @@ OVERALL_PATHWAY = 'butyrate"'
 
 rule all:
     input:
-        "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
 
-        join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
+        expand(join(config["sraRepo"], "{read}"), read=READS),
+        expand(join(config["readsDir"], "{read}.fa"), read=READS),
 
-        expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS)
+
+        #"workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
+
+        #join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
+
+        #expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS)
 
 '''
 
