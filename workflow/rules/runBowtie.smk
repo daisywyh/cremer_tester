@@ -1,20 +1,20 @@
-# rule prefetch:
-#     params:
-#         acc_num=lambda w: {w.read}
-#     output:
-#         join(config["sraRepo"],"{read}")
-#     shell:
-#         """
-#         prefetch {params.acc_num} -o {output}
-#         """
+rule prefetch:
+    params:
+        acc_num=lambda w: {w.read}
+    output:
+        join(config["sraRepo"],"{read}")
+    shell:
+        """
+        prefetch {params.acc_num} -o {output}
+        """
 
-# rule dump:
-#     input:
-#         join(config["sraRepo"],"{read}")
-#     output:
-#         join(config["readsDir"],"{read}.fa")
-#     shell:
-#         "vdb-dump -f fasta {input} --output-file {output}"
+rule dump:
+    input:
+        join(config["sraRepo"],"{read}")
+    output:
+        join(config["readsDir"],"{read}.fa")
+    shell:
+        "vdb-dump -f fasta {input} --output-file {output}"
 
 # i can't get the following two rules to work so i just compiled (cat) and ran the python code manually
 # rule combineCatalogues:
@@ -70,6 +70,9 @@ rule buildIndex:
     shell:
         """
         bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
+
+        bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
+
         """
 
 # rule runBowtie:
@@ -82,6 +85,7 @@ rule buildIndex:
 #     shell:
 #         """
 #         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output}
+#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/butyrate/butyrate_gene_catalogue.1.bt2 -f -U ERR525689.fa -S workflow/out/scratch/bt_output/butyrate/butyrate_ERR525689_bt.sam
 #         """
 
 # rule filterBowtieOutput:
