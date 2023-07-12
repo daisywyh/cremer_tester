@@ -81,7 +81,7 @@ rule runBowtie:
         index_name=lambda w: {w.overall_pathway}
     shell:
         """
-        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/butyrate/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output} 
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue.1.bt2 -f -U {input.reads} -S {output}
         """
 
 rule filterBowtieOutput:
