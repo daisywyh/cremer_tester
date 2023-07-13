@@ -1,21 +1,3 @@
-rule prefetch:
-    params:
-        acc_num=lambda w: {w.read}
-    output:
-        join(config["sraRepo"],"{read}")
-    shell:
-        """
-        prefetch {params.acc_num} -o {output}
-        """
-
-rule dump:
-    input:
-        join(config["sraRepo"],"{read}")
-    output:
-        join(config["readsDir"],"{read}.fa")
-    shell:
-        "vdb-dump -f fasta {input} --output-file {output}"
-
 # i can't get the following two rules to work so i just compiled (cat) and ran the python code manually
 # rule combineCatalogues:
 #     input:
