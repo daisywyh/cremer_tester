@@ -108,13 +108,17 @@ rule compileSummaries:
 # # known bug
 # # just forgot to put in the directory
 # # this should be the correct version?
+
+#"workflow/out/compiled_bt_hit_summaries.txt"
+
+#"workflow/out/compiled_bt_hit_summaries.csv"
+
+
 rule writeSummaryCSV:
     input:
-        #"workflow/out/compiled_bt_hit_summaries.txt"
         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     output:
-        #"workflow/out/compiled_bt_hit_summaries.csv"
         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
     shell:
