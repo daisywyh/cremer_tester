@@ -6,7 +6,6 @@ description: this is portioned out of the runBowtie.smk file. this is only becau
 takes so damn long, so I've portioned them out to make the program more modular
 """
 
-
 from os.path import join
 import os
 
