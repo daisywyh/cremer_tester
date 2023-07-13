@@ -70,15 +70,15 @@
 #         """
 
 
-# rule filterBowtieOutput:
-#     input:
-#         join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-#     output:
-#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-#     shell:
-#         """
-#         samtools view {input} -S -F 4 > {output}
-#         """
+rule filterBowtieOutput:
+    input:
+        join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+    output:
+        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+    shell:
+        """
+        samtools view {input} -S -F 4 > {output}
+        """
 
 rule summarizeHits:
     input:
