@@ -39,6 +39,6 @@ rule all:
         expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
 
 include:
-    "workflow/rules/prefetchDump.smk"
-    "workflow/rules/runActualBowtie.smk"
+    "workflow/rules/prefetchDump.smk",
+    "workflow/rules/runActualBowtie.smk"l
     "workflow/rules/bowtieCleanup.smk"
