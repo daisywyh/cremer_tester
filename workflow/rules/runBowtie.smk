@@ -52,10 +52,10 @@ rule buildIndex:
     shell:
         """
         bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
-
-        bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
-
         """
+
+        # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
+
 
 rule runBowtie:
     input:
