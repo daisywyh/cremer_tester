@@ -40,5 +40,5 @@ rule all:
 
 include:
     "workflow/rules/prefetchDump.smk",
-    "workflow/rules/runActualBowtie.smk"l
+    "workflow/rules/runActualBowtie.smk",
     "workflow/rules/bowtieCleanup.smk"
