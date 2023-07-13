@@ -80,15 +80,21 @@ rule filterBowtieOutput:
         samtools view {input} -S -F 4 > {output}
         """
 
-rule summarizeHits:
-    input:
-        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-    output:
-        join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
-    shell:
-        """
-        python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
-        """
+# samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
+
+
+# rule summarizeHits:
+#     input:
+#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+#     output:
+#         join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
+#     shell:
+#         """
+#         python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
+#         """
+
+
+# python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
 
 # # known issue
 # # need to put in pathway_abundance for this to work
