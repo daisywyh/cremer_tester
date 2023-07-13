@@ -92,9 +92,9 @@ rule summarizeHits:
 
 # # known issue
 # # need to put in pathway_abundance for this to work
+# #"workflow/out/compiled_bt_hit_summaries.txt"
 rule compileSummaries:
     output:
-        #"workflow/out/compiled_bt_hit_summaries.txt"
         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     params:
