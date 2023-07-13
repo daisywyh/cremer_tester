@@ -70,90 +70,90 @@ rule runBowtie:
         """
 
 
-# rule filterBowtieOutput:
-#     input:
-#         join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-#     output:
-#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-#     shell:
-#         """
-#         samtools view {input} -S -F 4 > {output}
-#         """
+rule filterBowtieOutput:
+    input:
+        join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+    output:
+        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+    shell:
+        """
+        samtools view {input} -S -F 4 > {output}
+        """
 
-# rule summarizeHits:
-#     input:
-#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-#     output:
-#         join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
-#     shell:
-#         """
-#         python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
-#         """
+rule summarizeHits:
+    input:
+        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+    output:
+        join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
+    shell:
+        """
+        python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
+        """
 
-# # # known issue
-# # # need to put in pathway_abundance for this to work
-# rule compileSummaries:
-#     output:
-#         #"workflow/out/compiled_bt_hit_summaries.txt"
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+# # known issue
+# # need to put in pathway_abundance for this to work
+rule compileSummaries:
+    output:
+        #"workflow/out/compiled_bt_hit_summaries.txt"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-#     params:
-#         dir = (join(config["hitSummaries"]))
-#     shell:
-#         """
-#         for f in {params.dir}/*.json ; do cat $f ; done > {output}
-#         """
+    params:
+        dir = (join(config["hitSummaries"]))
+    shell:
+        """
+        for f in {params.dir}/*.json ; do cat $f ; done > {output}
+        """
 
 
-# # # known bug
-# # # just forgot to put in the directory
-# # # this should be the correct version?
-# rule writeSummaryCSV:
-#     input:
-#         #"workflow/out/compiled_bt_hit_summaries.txt"
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+# # known bug
+# # just forgot to put in the directory
+# # this should be the correct version?
+rule writeSummaryCSV:
+    input:
+        #"workflow/out/compiled_bt_hit_summaries.txt"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-#     output:
-#         #"workflow/out/compiled_bt_hit_summaries.csv"
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+    output:
+        #"workflow/out/compiled_bt_hit_summaries.csv"
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
-#     shell:
-#         """
-#         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
-#         """
+    shell:
+        """
+        python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+        """
 
-# rule countTotalReads:
-#     input:
-#         join(config["readsDir"], "{read}.fa")
-#     output:
-#         join(config["readCounts"], "{read}_readCount.csv")
-#     shell:
-#         """
-#         count=$(grep ">" {input} | wc -l)
-#         echo {wildcards.read}","$count >> {output}
-#         """
+rule countTotalReads:
+    input:
+        join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["readCounts"], "{read}_readCount.csv")
+    shell:
+        """
+        count=$(grep ">" {input} | wc -l)
+        echo {wildcards.read}","$count >> {output}
+        """
 
-# rule compileReadCounts:
-#     output:
-#         "workflow/out/pathway_abundance/compiled_readCounts.csv"
-#     params:
-#         dir=(join(config["readCounts"]))
-#     shell:
-#         """
-#         for f in {params.dir}/*.txt ; do cat $f ; done > {output}
-#         """
+rule compileReadCounts:
+    output:
+        "workflow/out/pathway_abundance/compiled_readCounts.csv"
+    params:
+        dir=(join(config["readCounts"]))
+    shell:
+        """
+        for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+        """
 
-# # # known issue -> fix by putting correct filepath
-# rule getGeneLengthsInCatalogue:
-#     input:
-#        "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+# # known issue -> fix by putting correct filepath
+rule getGeneLengthsInCatalogue:
+    input:
+       "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
 
-#     output:
-#         "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
+    output:
+        "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
 
-#     shell:
-#         # fixed this because it seems like it's the wrong filepath??
-#         #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
-#         """
-#         python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
-#         """
+    shell:
+        # fixed this because it seems like it's the wrong filepath??
+        #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
+        """
+        python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
+        """
