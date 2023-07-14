@@ -13,16 +13,8 @@ configfile: "config/config.yml"
 
 rule all: 
     input:
-        join(config["readsDir"],"{read}.fa")
-
-
-rule dump:
-    input:
-        join(config["sraRepo"],"{read}")
-    output:
-        join(config["readsDir"],"{read}.fa")
-    shell:
-        "vdb-dump -f fasta {input} --output-file {output}"
+        expand(join(config["sraRepo"],"{read}"),read=READS),
+        expand(join(config["readsDir"], "{read}.fa"), read = READS),
 
 rule prefetch:
     params:
@@ -33,3 +25,11 @@ rule prefetch:
         """
         prefetch {params.acc_num} -o {output}
         """
+
+rule dump:
+    input:
+        join(config["sraRepo"],"{read}")
+    output:
+        join(config["readsDir"],"{read}.fa")
+    shell:
+        "vdb-dump -f fasta {input} --output-file {output}"
