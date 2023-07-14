@@ -42,32 +42,32 @@
 
 
 # note: overall_pathway is still `butyrate/butyrate`
-rule buildIndex:
-    input:
-        "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
-    params:
-        index_name=lambda w: {w.overall_pathway}
-    output:
-        join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
-    shell:
-        """
-        bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
-        """
+# rule buildIndex:
+#     input:
+#         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+#     params:
+#         index_name=lambda w: {w.overall_pathway}
+#     output:
+#         join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
+#     shell:
+#         """
+#         bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
+#         """
 
-        # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
+#         # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
 
 
-rule runBowtie:
-    input:
-        reads=join(config["readsDir"], "{read}.fa")
-    output:
-        join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-    params:
-        index_name=lambda w: {w.overall_pathway}
-    shell:
-        """
-        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
-        """
+# rule runBowtie:
+#     input:
+#         reads=join(config["readsDir"], "{read}.fa")
+#     output:
+#         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+#     params:
+#         index_name=lambda w: {w.overall_pathway}
+#     shell:
+#         """
+#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+#         """
 
 
 rule filterBowtieOutput:
@@ -94,43 +94,43 @@ rule summarizeHits:
         """
 
 
-# python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
+# # python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
 
-# known issue
-# need to put in pathway_abundance for this to work
-#"workflow/out/compiled_bt_hit_summaries.txt"
-rule compileSummaries:
-    output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
-
-    params:
-        dir = (join(config["hitSummaries"]))
-    shell:
-        """
-        for f in {params.dir}/*.json ; do cat $f ; done > {output}
-        """
-
-
-# # # known bug
-# # # just forgot to put in the directory
-# # # this should be the correct version?
-
+# # known issue
+# # need to put in pathway_abundance for this to work
 # #"workflow/out/compiled_bt_hit_summaries.txt"
+# rule compileSummaries:
+#     output:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-# #"workflow/out/compiled_bt_hit_summaries.csv"
+#     params:
+#         dir = (join(config["hitSummaries"]))
+#     shell:
+#         """
+#         for f in {params.dir}/*.json ; do cat $f ; done > {output}
+#         """
 
 
-rule writeSummaryCSV:
-    input:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+# # # # known bug
+# # # # just forgot to put in the directory
+# # # # this should be the correct version?
 
-    output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+# # #"workflow/out/compiled_bt_hit_summaries.txt"
 
-    shell:
-        """
-        python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
-        """
+# # #"workflow/out/compiled_bt_hit_summaries.csv"
+
+
+# rule writeSummaryCSV:
+#     input:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+
+#     output:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+
+#     shell:
+#         """
+#         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+#         """
 
 # rule countTotalReads:
 #     input:
