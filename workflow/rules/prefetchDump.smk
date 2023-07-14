@@ -9,10 +9,8 @@ takes so damn long, so I've portioned them out to make the program more modular
 from os.path import join
 import os
 
-configfile: "config/config.yml"
+configfile: "../../../config/config.yml"
 
-
-# this use to be rule "dump", but I changed it to all so that it runs by default
 rule all:
     input:
         join(config["sraRepo"],"{read}")
