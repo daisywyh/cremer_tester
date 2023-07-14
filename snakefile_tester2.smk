@@ -34,7 +34,7 @@ rule all:
         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
-        "workflow/out/pathway_abundance/compiled_readCounts.csv",
+        # "workflow/out/pathway_abundance/compiled_readCounts.csv",
         
         expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
         expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
