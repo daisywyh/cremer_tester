@@ -41,57 +41,57 @@
 # '''
 
 
-# note: overall_pathway is still `butyrate/butyrate`
-rule buildIndex:
-    input:
-        "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
-    params:
-        index_name=lambda w: {w.overall_pathway}
-    output:
-        join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
-    shell:
-        """
-        bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
-        """
+# # note: overall_pathway is still `butyrate/butyrate`
+# rule buildIndex:
+#     input:
+#         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+#     params:
+#         index_name=lambda w: {w.overall_pathway}
+#     output:
+#         join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
+#     shell:
+#         """
+#         bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
+#         """
 
-        # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
-
-
-rule runBowtie:
-    input:
-        reads=join(config["readsDir"], "{read}.fa")
-    output:
-        join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-    params:
-        index_name=lambda w: {w.overall_pathway}
-    shell:
-        """
-        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
-        """
+#         # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
 
 
-rule filterBowtieOutput:
-    input:
-        join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-    output:
-        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-    shell:
-        """
-        samtools view {input} -S -F 4 > {output}
-        """
+# rule runBowtie:
+#     input:
+#         reads=join(config["readsDir"], "{read}.fa")
+#     output:
+#         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+#     params:
+#         index_name=lambda w: {w.overall_pathway}
+#     shell:
+#         """
+#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+#         """
 
-# # samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
+
+# rule filterBowtieOutput:
+#     input:
+#         join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+#     output:
+#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+#     shell:
+#         """
+#         samtools view {input} -S -F 4 > {output}
+#         """
+
+# # # samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
 
 
-rule summarizeHits:
-    input:
-        join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
-    output:
-        join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
-    shell:
-        """
-        python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
-        """
+# rule summarizeHits:
+#     input:
+#         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
+#     output:
+#         join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
+#     shell:
+#         """
+#         python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
+#         """
 
 
 # python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
@@ -143,15 +143,15 @@ rule countTotalReads:
         echo {wildcards.read}","$count >> {output}
         """
 
-rule compileReadCounts:
-    output:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv"
-    params:
-        dir=(join(config["readCounts"]))
-    shell:
-        """
-        for f in {params.dir}/*.txt ; do cat $f ; done > {output}
-        """
+# rule compileReadCounts:
+#     output:
+#         "workflow/out/pathway_abundance/compiled_readCounts.csv"
+#     params:
+#         dir=(join(config["readCounts"]))
+#     shell:
+#         """
+#         for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+#         """
 
 # # known issue -> fix by putting correct filepath
 rule getGeneLengthsInCatalogue:
