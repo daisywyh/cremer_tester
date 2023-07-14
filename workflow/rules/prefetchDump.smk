@@ -11,7 +11,12 @@ import os
 
 configfile: "config/config.yml"
 
-rule all:
+rule all: 
+    input:
+        join(config["readsDir"],"{read}.fa")
+
+
+rule dump:
     input:
         join(config["sraRepo"],"{read}")
     output:
