@@ -10,4 +10,4 @@ set -euo pipefail
 
 # now i attempt to do buildIndex???
 echo "do the rest of the pipeline"
-snakemake -p --snakefile snakefile_tester2.smk --cores 5 --rerun-incomplete
+snakemake -p --snakefile snakefile_tester2.smk --cores 5 --forceall
