@@ -94,21 +94,21 @@ rule summarizeHits:
         """
 
 
-# # python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
+# python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
 
-# # known issue
-# # need to put in pathway_abundance for this to work
-# #"workflow/out/compiled_bt_hit_summaries.txt"
-# rule compileSummaries:
-#     output:
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+# known issue
+# need to put in pathway_abundance for this to work
+#"workflow/out/compiled_bt_hit_summaries.txt"
+rule compileSummaries:
+    output:
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-#     params:
-#         dir = (join(config["hitSummaries"]))
-#     shell:
-#         """
-#         for f in {params.dir}/*.json ; do cat $f ; done > {output}
-#         """
+    params:
+        dir = (join(config["hitSummaries"]))
+    shell:
+        """
+        for f in {params.dir}/*.json ; do cat $f ; done > {output}
+        """
 
 
 # # # known bug
@@ -120,17 +120,17 @@ rule summarizeHits:
 # #"workflow/out/compiled_bt_hit_summaries.csv"
 
 
-# rule writeSummaryCSV:
-#     input:
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+rule writeSummaryCSV:
+    input:
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-#     output:
-#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+    output:
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
-#     shell:
-#         """
-#         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
-#         """
+    shell:
+        """
+        python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+        """
 
 # rule countTotalReads:
 #     input:
