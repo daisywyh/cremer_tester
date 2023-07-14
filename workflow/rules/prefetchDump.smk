@@ -9,7 +9,7 @@ takes so damn long, so I've portioned them out to make the program more modular
 from os.path import join
 import os
 
-configfile: "../../config/config.yml"
+configfile: "../config/config.yml"
 
 rule all:
     input:
