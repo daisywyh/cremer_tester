@@ -21,11 +21,13 @@ rule all:
 
         join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
 
-        expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS),
-
         "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
         "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
         "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
+
+        expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS),
+        expand(join(config["bowtieOutputHits"],"butyrate/butyrate_{read}_bt_hits.sam"),read=READS,overall_pathway=OVERALL_PATHWAY),
+        expand(join(config["hitSummaries"], "butyrate_{read}_hit_summary.json"), read=READS, overall_pathway=OVERALL_PATHWAY),
 
         # "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
         # "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
