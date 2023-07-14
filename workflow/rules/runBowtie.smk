@@ -41,33 +41,33 @@
 # '''
 
 
-# note: overall_pathway is still `butyrate/butyrate`
-# rule buildIndex:
-#     input:
-#         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
-#     params:
-#         index_name=lambda w: {w.overall_pathway}
-#     output:
-#         join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
-#     shell:
-#         """
-#         bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
-#         """
+note: overall_pathway is still `butyrate/butyrate`
+rule buildIndex:
+    input:
+        "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+    params:
+        index_name=lambda w: {w.overall_pathway}
+    output:
+        join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
+    shell:
+        """
+        bowtie2-build -f {input} workflow/out/index/{params.index_name}_gene_catalogue
+        """
 
-#         # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
+        # bowtie2-build -f workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa workflow/out/index/butyrate/butyrate_gene_catalogue
 
 
-# rule runBowtie:
-#     input:
-#         reads=join(config["readsDir"], "{read}.fa")
-#     output:
-#         join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
-#     params:
-#         index_name=lambda w: {w.overall_pathway}
-#     shell:
-#         """
-#         bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
-#         """
+rule runBowtie:
+    input:
+        reads=join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+    params:
+        index_name=lambda w: {w.overall_pathway}
+    shell:
+        """
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+        """
 
 
 rule filterBowtieOutput:
@@ -80,7 +80,7 @@ rule filterBowtieOutput:
         samtools view {input} -S -F 4 > {output}
         """
 
-# samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
+# # samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
 
 
 rule summarizeHits:
@@ -111,13 +111,13 @@ rule compileSummaries:
         """
 
 
-# # # known bug
-# # # just forgot to put in the directory
-# # # this should be the correct version?
+# # known bug
+# # just forgot to put in the directory
+# # this should be the correct version?
 
-# #"workflow/out/compiled_bt_hit_summaries.txt"
+#"workflow/out/compiled_bt_hit_summaries.txt"
 
-# #"workflow/out/compiled_bt_hit_summaries.csv"
+#"workflow/out/compiled_bt_hit_summaries.csv"
 
 
 rule writeSummaryCSV:
@@ -132,38 +132,38 @@ rule writeSummaryCSV:
         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
         """
 
-# rule countTotalReads:
-#     input:
-#         join(config["readsDir"], "{read}.fa")
-#     output:
-#         join(config["readCounts"], "{read}_readCount.csv")
-#     shell:
-#         """
-#         count=$(grep ">" {input} | wc -l)
-#         echo {wildcards.read}","$count >> {output}
-#         """
+rule countTotalReads:
+    input:
+        join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["readCounts"], "{read}_readCount.csv")
+    shell:
+        """
+        count=$(grep ">" {input} | wc -l)
+        echo {wildcards.read}","$count >> {output}
+        """
 
-# rule compileReadCounts:
-#     output:
-#         "workflow/out/pathway_abundance/compiled_readCounts.csv"
-#     params:
-#         dir=(join(config["readCounts"]))
-#     shell:
-#         """
-#         for f in {params.dir}/*.txt ; do cat $f ; done > {output}
-#         """
+rule compileReadCounts:
+    output:
+        "workflow/out/pathway_abundance/compiled_readCounts.csv"
+    params:
+        dir=(join(config["readCounts"]))
+    shell:
+        """
+        for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+        """
 
-# # # known issue -> fix by putting correct filepath
-# rule getGeneLengthsInCatalogue:
-#     input:
-#        "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+# # known issue -> fix by putting correct filepath
+rule getGeneLengthsInCatalogue:
+    input:
+       "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
 
-#     output:
-#         "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
+    output:
+        "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
 
-#     shell:
-#         # fixed this because it seems like it's the wrong filepath??
-#         #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
-#         """
-#         python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
-#         """
+    shell:
+        # fixed this because it seems like it's the wrong filepath??
+        #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
+        """
+        python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
+        """
