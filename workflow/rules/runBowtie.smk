@@ -143,15 +143,15 @@ rule countTotalReads:
         echo {wildcards.read}","$count >> {output}
         """
 
-rule compileReadCounts:
-    output:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv"
-    params:
-        dir=(join(config["readCounts"]))
-    shell:
-        """
-        for f in {params.dir}/*.txt ; do cat $f ; done > {output}
-        """
+# rule compileReadCounts:
+#     output:
+#         "workflow/out/pathway_abundance/compiled_readCounts.csv"
+#     params:
+#         dir=(join(config["readCounts"]))
+#     shell:
+#         """
+#         for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+#         """
 
 # # known issue -> fix by putting correct filepath
 rule getGeneLengthsInCatalogue:
