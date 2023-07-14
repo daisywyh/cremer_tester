@@ -41,7 +41,7 @@
 # '''
 
 
-note: overall_pathway is still `butyrate/butyrate`
+# note: overall_pathway is still `butyrate/butyrate`
 rule buildIndex:
     input:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
