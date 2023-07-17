@@ -2,7 +2,7 @@ set -euo pipefail
 
 # just do prefetch and dump
 echo "doing prefetch + dump"
-snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores 5 --forceall
+snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores 5
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
@@ -11,8 +11,6 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 # now i attempt to do buildIndex???
 echo "run the following: buildIndex, runBowtie, filterBowtieOutput, summarizeHits"
 snakemake -p --snakefile runActualBowtie.smk --cores 5 --forceall
-
-# 
 
 # now i attempt to do buildIndex???
 echo "do the rest of the pipeline"
