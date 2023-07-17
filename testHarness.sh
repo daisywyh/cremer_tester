@@ -8,6 +8,8 @@ echo "start!       \  /"
 echo "   __________/ / "
 echo "-=:___________/ "
 
+
+# get user input for number of cores to use
 echo "how many cores do you want to use today?"
 
 read numCores
@@ -36,4 +38,6 @@ snakemake -p --snakefile workflow/rules/summarise.smk --cores $numCores
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
 snakemake -p --snakefile workflow/rules/finalCleanup.smk --cores $numCores
 
-echo "SNAKEMAKE PIPELINE DONE!"
+echo "SNAKEMAKE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
+echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
+echo "ヾ( ˃ᴗ˂ )◞ • *✰"
