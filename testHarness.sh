@@ -10,7 +10,7 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 
 # now i attempt to do buildIndex???
 echo "do the rest of the pipeline"
-snakemake -np --snakefile snakefile_tester2.smk --cores 5 --forceall
+snakemake -p --snakefile snakefile_tester2.smk --cores 5 --forceall
 
 #echo "do the last step"
 #snakemake -np --snakefile snakefile_tester3.smk --cores 5 --forceall
