@@ -13,4 +13,6 @@ echo "do the rest of the pipeline"
 snakemake -p --snakefile snakefile_tester2.smk --cores 5 --forceall
 
 echo "do the last step"
+snakemake -p --snakefile snakefile_tester3.smk --cores 5 --forceall
+
 
