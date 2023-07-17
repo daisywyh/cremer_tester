@@ -20,6 +20,9 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 echo "do the rest of the pipeline"
 snakemake -p --snakefile snakefile_tester2.smk --cores 5 --forceall
 
+echo "runActualBowtie.smk test"
+snakemake -p --snakefile workflow/rules/runActualBowtie.smk --cores 5 --forceall
+
 #echo "do the last step"
 #snakemake -np --snakefile snakefile_tester3.smk --cores 5 --forceall
 
