@@ -45,5 +45,4 @@ include:
     "workflow/rules/runIndex.smk",
     "workflow/rules/runActualBowtie.smk",
     "workflow/rules/summarise.smk",
-
     "workflow/rules/compileReads.smk",
