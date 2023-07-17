@@ -23,7 +23,7 @@ echo "note: this step is run manually as a shell command I hard coded"
 awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
 
 echo "run runIndex.smk"
-echo "making the Bowtie index! ♥（ﾉ´∀`)"
+echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"
 snakemake -p --snakefile workflow/rules/runIndex.smk --cores $numCores
 
