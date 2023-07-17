@@ -17,7 +17,6 @@ PATHWAY = ["butyrate_rerun"]
 
 rule all:
     input:
-        expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
         "workflow/out/pathway_abundance/compiled_readCounts.csv",
 
         expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
