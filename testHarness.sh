@@ -33,10 +33,10 @@ echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
 snakemake -p --snakefile workflow/rules/runActualBowtie.smk --cores $numCores
 
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake -p --snakefile workflow/rules/summarise.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/summarise.smk --cores $numCores --forceall
 
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake -p --snakefile workflow/rules/finalCleanup.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/finalCleanup.smk --cores $numCores --forceall
 
 echo "SNAKEMAKE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
