@@ -1,3 +1,15 @@
+rule runBowtie:
+    input:
+        reads=join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["bowtieOutput"], "{overall_pathway}/{overall_pathway}_{read}_bt.sam")
+    params:
+        index_name=lambda w: {w.overall_pathway}
+    shell:
+        """
+        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+        """
+
 rule filterBowtieOutput:
     input:
         join(config["bowtieOutput"],"{overall_pathway}/{overall_pathway}_{read}_bt.sam")
