@@ -2,7 +2,7 @@ set -euo pipefail
 
 # just do prefetch and dump
 echo "doing prefetch + dump"
-snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores 5
+snakemake -p --snakefile workflow/rules/prefetchDump.smk --=1 -- forceall
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
