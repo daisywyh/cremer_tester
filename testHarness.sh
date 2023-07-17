@@ -1,5 +1,13 @@
 set -euo pipefail
 
+
+echo "             ____"
+echo "            / . .\ "
+echo "            \  ---<"
+echo "             \  /"
+echo "   __________/ / "
+echo "-=:___________/ "
+
 # just do prefetch and dump
 echo "doing prefetch + dump"
 snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores 5
