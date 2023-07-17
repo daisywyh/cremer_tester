@@ -14,7 +14,6 @@ configfile: "config/config.yml"
 with open(config["reads_file"], 'r') as f:
     READS = f.read().split()
 
-
 rule all: 
     input:
         expand(join(config["sraRepo"],"{read}"),read=READS),

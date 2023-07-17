@@ -1,3 +1,21 @@
+# rule prefetch:
+#     params:
+#         acc_num=lambda w: {w.read}
+#     output:
+#         join(config["sraRepo"],"{read}")
+#     shell:
+#         """
+#         prefetch {params.acc_num} -o {output}
+#         """
+
+# rule dump:
+#     input:
+#         join(config["sraRepo"],"{read}")
+#     output:
+#         join(config["readsDir"],"{read}.fa")
+#     shell:
+#         "vdb-dump -f fasta {input} --output-file {output}"
+
 # i can't get the following two rules to work so i just compiled (cat) and ran the python code manually
 # rule combineCatalogues:
 #     input:
@@ -80,6 +98,9 @@
 #         samtools view {input} -S -F 4 > {output}
 #         """
 
+# # # samtools view "workflow/out/scratch/bt_output/butyrate/butyrate_ERR525688_bt.sam" -S -F 4 > "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam"
+
+
 # rule summarizeHits:
 #     input:
 #         join(config["bowtieOutputHits"],"{overall_pathway}/{overall_pathway}_{read}_bt_hits.sam")
@@ -90,41 +111,44 @@
 #         python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
 #         """
 
-# known issue
-# need to put in pathway_abundance for this to work
-#"workflow/out/compiled_bt_hit_summaries.txt"
-rule compileSummaries:
-    output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-    params:
-        dir = (join(config["hitSummaries"]))
-    shell:
-        """
-        for f in {params.dir}/*.json ; do cat $f ; done > {output}
-        """
+# # python3 workflow/scripts/summarize_hits.py "workflow/out/scratch/bt_hits/butyrate/butyrate_ERR525688_bt_hits.sam" "workflow/out/bt_hit_summaries/butyrate_ERR525688_hit_summary.json" kamA ERR525688
 
+# # known issue
+# # need to put in pathway_abundance for this to work
+# #"workflow/out/compiled_bt_hit_summaries.txt"
+# rule compileSummaries:
+#     output:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
-# # known bug
-# # just forgot to put in the directory
-# # this should be the correct version?
-
-#"workflow/out/compiled_bt_hit_summaries.txt"
-
-#"workflow/out/compiled_bt_hit_summaries.csv"
+#     params:
+#         dir = (join(config["hitSummaries"]))
+#     shell:
+#         """
+#         for f in {params.dir}/*.json ; do cat $f ; done > {output}
+#         """
 
 
-rule writeSummaryCSV:
-    input:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+# # # known bug
+# # # just forgot to put in the directory
+# # # this should be the correct version?
 
-    output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+# #"workflow/out/compiled_bt_hit_summaries.txt"
 
-    shell:
-        """
-        python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
-        """
+# #"workflow/out/compiled_bt_hit_summaries.csv"
+
+
+# rule writeSummaryCSV:
+#     input:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+
+#     output:
+#         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+
+#     shell:
+#         """
+#         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+#         """
 
 rule countTotalReads:
     input:
@@ -137,6 +161,10 @@ rule countTotalReads:
         echo {wildcards.read}","$count >> {output}
         """
 
+
+# try fixing this by changing the ending?
+# for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+
 rule compileReadCounts:
     output:
         "workflow/out/pathway_abundance/compiled_readCounts.csv"
@@ -144,7 +172,7 @@ rule compileReadCounts:
         dir=(join(config["readCounts"]))
     shell:
         """
-        for f in {params.dir}/*.txt ; do cat $f ; done > {output}
+        for f in {params.dir}/*.csv ; do cat $f ; done > {output}
         """
 
 # # known issue -> fix by putting correct filepath

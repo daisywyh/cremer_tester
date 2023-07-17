@@ -42,4 +42,7 @@ rule all:
         expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
 
 include:
-    "workflow/rules/runBowtie.smk"
+    "workflow/rules/runIndex.smk",
+    "workflow/rules/runActualBowtie.smk",
+    "workflow/rules/summarise.smk",
+    "workflow/rules/compileReads.smk",
