@@ -22,9 +22,9 @@ echo "doing removeGeneCatalogueDuplicates"
 echo "note: this step is run manually as a shell command I hard coded"
 awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
 
-# now i attempt to do buildIndex???
 echo "run runIndex.smk"
 echo "making the Bowtie index! ♥（ﾉ´∀`)"
+echo "this might also take a while ... (ಥ﹏ಥ)"
 snakemake -p --snakefile workflow/rules/runIndex.smk --cores $numCores
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
@@ -37,5 +37,3 @@ echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε
 snakemake -p --snakefile workflow/rules/finalCLeanup.smk --cores $numCores
 
 echo "(´｡• ᵕ •｡`) ♡ SNAKEMAKE PIPELINE DONE!"
-
-
