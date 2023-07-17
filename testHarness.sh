@@ -34,6 +34,6 @@ echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
 snakemake -p --snakefile workflow/rules/summarise.smk --cores $numCores
 
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake -p --snakefile workflow/rules/finalCLeanup.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/finalCleanup.smk --cores $numCores
 
 echo "SNAKEMAKE PIPELINE DONE!"
