@@ -8,7 +8,6 @@ echo "start!       \  /"
 echo "   __________/ / "
 echo "-=:___________/ "
 
-
 # get user input for number of cores to use
 echo "how many cores do you want to use today?"
 
@@ -17,7 +16,7 @@ read numCores
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores $numCores --forceall
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
@@ -27,10 +26,10 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"
-snakemake -p --snakefile workflow/rules/runIndex.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/runIndex.smk --cores $numCores --forceall
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake -p --snakefile workflow/rules/runActualBowtie.smk --cores $numCores
+snakemake -p --snakefile workflow/rules/runActualBowtie.smk --cores $numCores --forceall
 
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
 snakemake -p --snakefile workflow/rules/summarise.smk --cores $numCores --forceall
