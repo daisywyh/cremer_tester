@@ -46,3 +46,4 @@ include:
     "workflow/rules/runActualBowtie.smk",
     "workflow/rules/summarise.smk",
     "workflow/rules/compileReads.smk",
+    "workflow/rules/finalCleanup.smk"
