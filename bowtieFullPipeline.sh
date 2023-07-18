@@ -9,9 +9,11 @@ echo "   __________/ / "
 echo "-=:___________/ "
 
 # get user input for number of cores to use
-echo "how many cores do you want to use today?"
+# echo "how many cores do you want to use today?"
 
-read numCores
+# read numCores
+
+numCores = 5
 
 # just do prefetch and dump
 echo "doing prefetch + dump"
