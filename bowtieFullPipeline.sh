@@ -26,10 +26,11 @@ NUMCORES=5
 #    RUNFLAG="--forceall"
 # fi 
 
+
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/prefetchDump.smk --forceall --cores $NUMCORES 
+snakemake --snakefile workflow/rules/prefetchDump.smk --forceall --cores $NUMCORES --unlock 
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
@@ -38,7 +39,7 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
-echo "this might also take a while ... (ಥ﹏ಥ)"
+echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
 snakemake --snakefile workflow/rules/runIndex.smk --forceall --cores $NUMCORES 
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
