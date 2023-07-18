@@ -28,16 +28,16 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/runIndex.smk --cores $NUMCORES --forceall  --unlock
+snakemake -p --snakefile workflow/rules/runIndex.smk --cores $NUMCORES --forceall  --unlock
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES --forceall --unlock
+snakemake -p --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES --forceall --unlock
 
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake --snakefile workflow/rules/summarise.smk --cores $NUMCORES --forceall --unlock
+snakemake -p --snakefile workflow/rules/summarise.smk --cores $NUMCORES --forceall --unlock
 
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake --snakefile workflow/rules/finalCleanup.smk --cores $NUMCORES --forceall --unlock
+snakemake -p --snakefile workflow/rules/finalCleanup.smk --cores $NUMCORES --forceall --unlock
 
 echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
