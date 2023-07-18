@@ -26,10 +26,11 @@ NUMCORES=5
 #    RUNFLAG="--forceall"
 # fi 
 
+
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/prefetchDump.smk --forceall --cores $NUMCORES 
+snakemake --snakefile workflow/rules/prefetchDump.smk --forceall --cores $NUMCORES --unlock 
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
@@ -38,17 +39,17 @@ awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_co
 
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
-echo "this might also take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/runIndex.smk --forceall --cores $NUMCORES 
+echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
+snakemake --snakefile workflow/rules/runIndex.smk --forceall --cores $NUMCORES --unlock
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile workflow/rules/runActualBowtie.smk --forceall --cores $NUMCORES 
+snakemake --snakefile workflow/rules/runActualBowtie.smk --forceall --cores $NUMCORES --unlock
 
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake --snakefile workflow/rules/summarise.smk --forceall --cores $NUMCORES 
+snakemake --snakefile workflow/rules/summarise.smk --forceall --cores $NUMCORES --unlock
 
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake --snakefile workflow/rules/finalCleanup.smk --forceall --cores $NUMCORES 
+snakemake --snakefile workflow/rules/finalCleanup.smk --forceall --cores $NUMCORES --unlock
 
 echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
