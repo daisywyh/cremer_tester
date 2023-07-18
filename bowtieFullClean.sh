@@ -2,7 +2,7 @@ set -euo pipefail
 
 # cute little ascii art because we deserve nice things!
 echo "             ____"
-echo "snakemake   / . .\ "
+echo "clean       / . .\ "
 echo "pipeline    \  ---< "
 echo "start!       \  /"
 echo "   __________/ / "
