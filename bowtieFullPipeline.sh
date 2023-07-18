@@ -42,7 +42,7 @@ echo "this might also take a while ... (ಥ﹏ಥ)"
 snakemake --snakefile workflow/rules/runIndex.smk --cores $NUMCORES
 
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES --rerun-incomplete
+snakemake --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES
 
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
 snakemake --snakefile workflow/rules/summarise.smk --cores $NUMCORES
