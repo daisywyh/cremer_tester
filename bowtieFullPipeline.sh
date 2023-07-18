@@ -18,7 +18,7 @@ NUMCORES=5
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES --forceall --unlock
+snakemake -p --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES --forceall
 
 # this does rule removeGeneCatalogueDupicates
 echo "doing removeGeneCatalogueDuplicates"
