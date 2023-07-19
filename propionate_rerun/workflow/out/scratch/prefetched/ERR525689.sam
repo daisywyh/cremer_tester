@@ -1,0 +1,13 @@
+@HD    VN:1.4    SO:coordinate
+@SQ    SN:CHROMOSOME_I    LN:15072423
+UR:ftp://ftp.ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/invertebrates/Caenorhabditis_elegans/
+WBcel215/Primary_Assembly/assembled_chromosomes/FASTA/chrI.fa.gz    AS:ce10    
+SP:Caenorhabditis elegans
+ 
+@SQ    SN:CHROMOSOME_II    LN:15279345    
+UR:ftp://ftp.ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/invertebrates/Caenorhabditis_elegans/
+WBcel215/Primary_Assembly/assembled_chromosomes/FASTA/chrII.fa.gz     AS:ce10    
+SP:Caenorhabditis elegans  
+ 
+@RG    ID:1    PL:ILLUMINA    LB:C_ele_05    DS:WGS of C elegans    PG:BamIndexDecoder
+@PG    ID:bwa    PN:bwa    VN:0.5.10-tpx

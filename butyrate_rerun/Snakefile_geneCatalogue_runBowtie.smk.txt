@@ -1,0 +1,60 @@
+from os.path import join
+import os
+
+configfile: "config/config.yml"
+
+# this part for initial parsing of catalogue
+# PATHWAYS = ["lysine", "glutarate", "aminobutyrate_buk", "aminobutyrate_but", "acetylCoA_buk", "acetylCoA_but"]
+# PATHWAY = PATHWAYS[0]
+#
+# gene_file = "config/" + PATHWAY + "/" + PATHWAY + "_gene_list.txt"
+# with open(gene_file, 'r') as f:
+#     genes = f.read()
+#     GENES = genes.split()
+#
+# with open(config["hitStrainF"], 'r') as f:
+#     hit_strains = f.read()
+#     HIT_STRAINS = hit_strains.split()
+
+# this part for compiled catalogue of overall propionate/butyrate
+# read in READS from list of accession in a read file
+with open(config["reads_file"], 'r') as f:
+    READS = f.read().split()
+
+PATHWAY = ["butyrate_rerun"]
+
+rule all:
+    input:
+        # make the gene catalogue
+        # expand(join(config["nucProdigalDir"],"{hit_strain}_prodigal_nuc.fna"), hit_strain=HIT_STRAINS),
+        # expand(join(config["nucProdigalDirwHeader"],"{hit_strain}_prodigal_nuc_addHeader.fna"), hit_strain=HIT_STRAINS),
+        # "workflow/out/compiled_nuc_prodigal_translation_hit_strains.fna",
+        # expand("workflow/out/{pathway}/{pathway}_{gene}_catalogue.faa", gene=GENES, pathway=PATHWAY),
+        # expand("workflow/out/compiled_pathway_catalogues/compiled_{pathway}_catalogue.faa", pathway=PATHWAYS),
+        # download the metagenomic info and perform bowtie
+        expand(join(config["sraRepo"],"{read}"),read=READS),
+        expand(join(config["readsDir"], "{read}.fa"), read = READS),
+        # combine all pathways into the overarching butyrate or propionate catalogue
+        # expand("workflow/out/compiled_pathway_catalogues/compiled_{pathway}_catalogue.faa",pathway=PATHWAYS),
+        # expand("workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue.fa", overall_pathway=OVERALL_PATHWAY),
+        "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs.fa",
+	# bowtie search and following parsing
+        join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
+        expand(join(config["bowtieOutput"],"butyrate/butyrate_{read}_bt.sam"), read=READS, overall_pathway=OVERALL_PATHWAY),
+        expand(join(config["bowtieOutputHits"],"butyrate/butyrate_{read}_bt_hits.sam"),read=READS,overall_pathway=OVERALL_PATHWAY),
+        expand(join(config["hitSummaries"], "butyrate_{read}_hit_summary.json"), read=READS, overall_pathway=OVERALL_PATHWAY),
+        "workflow/out/compiled_bt_hit_summaries.txt",
+        "workflow/out/compiled_bt_hit_summaries.csv"
+        # do pathway counts!
+        expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
+        "workflow/out/pathway_abundance/compiled_readCounts.csv",
+        # compiling results from bowtie search
+        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAYS),
+        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAYS),
+        # getting gene lengths to perform gene length correctino for pathway abundance calcualtions'
+        expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
+
+
+include:
+    # "workflow/rules/make_gene_catalogue.smk"
+    "workflow/rules/runBowtie.smk"
