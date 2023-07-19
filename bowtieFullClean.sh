@@ -2,9 +2,9 @@ set -euo pipefail
 
 # cute little ascii art because we deserve nice things!
 echo "             ____"
-echo "clean       / . .\ "
-echo "pipeline    \  ---< "
-echo "start!       \  /"
+echo "clean       / ಥ ಥ\ "
+echo "pipeline    \  --< "
+echo "start        \  /"
 echo "   __________/ / "
 echo "-=:___________/ "
 
@@ -26,31 +26,24 @@ NUMCORES=5
 #    RUNFLAG="--forceall"
 # fi 
 
-
 # just do prefetch and dump
-echo "doing prefetch + dump"
-echo "this might take a while ... (ಥ﹏ಥ)"
+echo "(ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ)"
+echo "removing all files from prefetch + dump"
 snakemake --snakefile workflow/rules/prefetchDump.smk --delete-all-output --cores $NUMCORES
 
-# this does rule removeGeneCatalogueDupicates
-echo "doing removeGeneCatalogueDuplicates"
-echo "note: this step is run manually as a shell command I hard coded"
-awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa" & disown
+echo "removing the output from removeGeneCatalogueDuplicates"
+rm "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
 
-echo "run runIndex.smk"
-echo "making the Bowtie index! (♡-_-♡)"
-echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
+echo "removing runIndex.smk"
 snakemake --snakefile workflow/rules/runIndex.smk --delete-all-output --cores $NUMCORES 
 
-echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
+echo "removing runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
 snakemake --snakefile workflow/rules/runActualBowtie.smk --delete-all-output --cores $NUMCORES
 
-echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
+echo "removing summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
 snakemake --snakefile workflow/rules/summarise.smk --delete-all-output --cores $NUMCORES
 
-echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
+echo "removing finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
 snakemake --snakefile workflow/rules/finalCleanup.smk --delete-all-output --cores $NUMCORES
 
-echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
-echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
-echo "ヾ( ˃ᴗ˂ )◞ • *✰"
+echo "The world has been cleansed. The files have been removed. May peace be with you once again."
