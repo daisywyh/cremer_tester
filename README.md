@@ -1,6 +1,6 @@
 # Documentation for `bowtieFullPipeline.sh` <!-- omit in toc --> 
 
-This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen
+This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen.
 
 This documentation was last updated on **19 July 2023** by **Yu Han Daisy Wang**. For any questions or issues, please contact Daisy.
 
@@ -42,6 +42,7 @@ This documentation was last updated on **19 July 2023** by **Yu Han Daisy Wang**
     - [Input files](#input-files-4)
     - [Last output file](#last-output-file-4)
 - [4. Known Issues](#4-known-issues)
+- [5. Other useful links/readings](#5-other-useful-linksreadings)
 
 
 ## 1. How to run this pipeline
@@ -104,7 +105,8 @@ SRA4
 2. Make sure that you've activated the correct `mamba`/`conda` environment
 3. Change the value for `NUMCORES`
    1. In the file `bowtieFullPipeline.sh`, there is a variable called `NUMCORES` that specifies the number of cores you'd like like Snakemake to run on. Change this to our desired number. 
-4. Run the actual file!
+4. Double check the settings. I currently have this thing running on 
+5. Run the actual file!
    1. You can do this by running `bash bowtieFullPipeline.sh` in your terminal/shell.
    2. If you want this to run in the background, instead try running `nohup bash bowtieFullPipeline.sh`. 
       1. Useful link on understanding how this works: https://unix.stackexchange.com/questions/3886/difference-between-nohup-disown-and
@@ -216,5 +218,16 @@ This step takes in a list of SRA accession numbers, then uses them to download t
 #### Last output file
 
 ## 4. Known Issues
+
 1. `mamba` doesn't seem to work on Apple M1 chip systems
    1. Solution: run this process on something with an x86_64 chip. In my case, I ran it on the lab server, which runs on an x86_64 system.
+2. Things get weird when you try to run things on a not completely empty directory?
+   1. That's what the `bowtieFullClean.sh` pipeline is for!
+
+## 5. Other useful links/readings
+
+if you're new to Snakemake, I recommend at least giving a cursory glance to the official Snakemake tutorial and documentation, which can be found here: https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html
+
+Another useful resource might be my personal lab notes, in which I go into much more detail on how I kept everything working which can be found here: https://github.com/daisywyh/DaisyCremerLabNotes
+
+

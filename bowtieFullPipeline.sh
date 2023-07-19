@@ -33,21 +33,26 @@ echo "this might take a while ... (ಥ﹏ಥ)"
 snakemake --snakefile workflow/rules/prefetchDump.smk --forceall --cores $NUMCORES -p
 
 # this does rule removeGeneCatalogueDupicates
+echo "________________________________________________"
 echo "doing removeGeneCatalogueDuplicates"
 echo "note: this step is run manually as a shell command I hard coded"
 awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
 
+echo "________________________________________________"
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
 snakemake --snakefile workflow/rules/runIndex.smk --forceall --cores $NUMCORES -p
 
+echo "________________________________________________"
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
 snakemake --snakefile workflow/rules/runActualBowtie.smk --forceall --cores $NUMCORES -p
 
+echo "________________________________________________"
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
 snakemake --snakefile workflow/rules/summarise.smk --forceall --cores $NUMCORES -p
 
+echo "________________________________________________"
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
 snakemake --snakefile workflow/rules/finalCleanup.smk --forceall --cores $NUMCORES -p
 
