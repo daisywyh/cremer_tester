@@ -19,4 +19,3 @@ for record in records:
     records_add_header.append(record)
 
 SeqIO.write(records_add_header, output_f, "fasta")
-
