@@ -6,7 +6,7 @@ configfile: "config/config.yml"
 with open(config["reads_file"], 'r') as f:
     READS = f.read().split()
 
-PATHWAY = ["butyrate_rerun"]
+PATHWAY = ["propionate_rerun"]
 
 
 rule all:

@@ -6,13 +6,13 @@ configfile: "config/config.yml"
 with open(config["reads_file"], 'r') as f:
     READS = f.read().split()
 
-PATHWAY = ["butyrate_rerun"]
-OVERALL_PATHWAY = 'butyrate"'
+PATHWAY = ["propionate_rerun"]
+OVERALL_PATHWAY = 'propionate'
 
 rule all:
     input:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.txt",
+        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.csv",
 
         expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
         expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY)
