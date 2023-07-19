@@ -1,9 +1,0 @@
-hgdC
-hgdB
-hgdA
-gctA
-gctB
-gcdB
-gcdA
-but
-bcd

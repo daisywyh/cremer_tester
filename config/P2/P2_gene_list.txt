@@ -1,5 +1,0 @@
-lcdA
-lcdB
-lcdC
-acrC
-pct
