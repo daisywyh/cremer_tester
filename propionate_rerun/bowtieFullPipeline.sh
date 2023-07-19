@@ -35,7 +35,7 @@ snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p
 echo "________________________________________________"
 echo "doing removeGeneCatalogueDuplicates"
 echo "note: this step is run manually as a shell command I hard coded"
-awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
+awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/proprionate/proprionate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/proprionate/proprionate_compiled_gene_catalogue_editIDs_noDups.fa"
 
 echo "________________________________________________"
 echo "run runIndex.smk"

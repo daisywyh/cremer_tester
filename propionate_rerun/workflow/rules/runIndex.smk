@@ -6,21 +6,21 @@ configfile: "config/config.yml"
 with open(config["reads_file"], 'r') as f:
     READS = f.read().split()
 
-PATHWAY = ["butyrate_rerun"]
-OVERALL_PATHWAY = 'butyrate"'
+PATHWAY = ["propionate_rerun"]
+OVERALL_PATHWAY = 'propionate'
 
 rule all:
     input:
-        join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
+        join(config["indexDir"], "propionate/propionate_gene_catalogue.1.bt2"),
 
-        "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
-        "workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
-        "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
+        "workflow/out/gene_catalogues/propionate/propionate_compiled_gene_catalogue_editIDs.fa",
+        "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs_noDups.fa",
+        "workflow/out/gene_catalogues/propionate/propionate_compiled_gene_catalogue_editIDs_noDups.fa",
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
 
 
-# overall_pathway is still `butyrate/butyrate`
+# overall_pathway is still `propionate/propionate`
 rule buildIndex:
     input:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
