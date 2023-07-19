@@ -26,7 +26,6 @@ NUMCORES=5
 #    RUNFLAG="--forceall"
 # fi 
 
-
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
