@@ -31,6 +31,10 @@ echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
 snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p
 
+echo "doing editCatalogueIDs"
+echo "note: this step is run manually as a python command I hard coded"
+python3 workflow/scripts/edit_catalog_id.py "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue.fa" "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs.fa"
+
 # this does rule removeGeneCatalogueDupicates
 echo "________________________________________________"
 echo "doing removeGeneCatalogueDuplicates"
