@@ -20,10 +20,12 @@ prodigalEnv: "workflow/envs/prodigal_local.yml"
 indexDir: "workflow/out/index"
 
 #readsDir: "/scratch/users/reb26/reads"
-readsDir: "workflow/out/scratch/reads"
+# readsDir: "workflow/out/scratch/reads"
+readsDir: "../shared_config/out/scratch/reads"
+
 
 #reads_file: "config/pract.txt"
-reads_file: "../sra_run_accessions_Nayfach_short.txt"
+reads_file: "../shared_config/sra_run_accessions_Nayfach_short.txt"
 
 #bowtieOutput: "/scratch/users/reb26/bt_output"
 bowtieOutput: "workflow/out/scratch/bt_output"
@@ -32,7 +34,8 @@ bowtieOutput: "workflow/out/scratch/bt_output"
 bowtieOutputHits: "workflow/out/scratch/bt_hits"
 
 #sraRepo: "/scratch/users/reb26/prefetched"
-sraRepo: "workflow/out/scratch/prefetched"
+# sraRepo: "workflow/out/scratch/prefetched"
+sraRepo: "../shared_config/out/scratch/prefetched"
 
 hitSummaries: "workflow/out/bt_hit_summaries"
 

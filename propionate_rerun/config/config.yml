@@ -33,7 +33,8 @@ bowtieOutput: "workflow/out/scratch/bt_output"
 bowtieOutputHits: "workflow/out/scratch/bt_hits"
 
 #sraRepo: "/scratch/users/reb26/prefetched"
-sraRepo: "workflow/out/scratch/prefetched"
+# sraRepo: "workflow/out/scratch/prefetched"
+sraRepo: "../shared_config/out/scratch/prefetched"
 
 hitSummaries: "workflow/out/bt_hit_summaries"
 
