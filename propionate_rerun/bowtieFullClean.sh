@@ -32,7 +32,7 @@ echo "removing all files from prefetch + dump"
 snakemake --snakefile workflow/rules/prefetchDump.smk --delete-all-output --cores $NUMCORES
 
 echo "removing the output from removeGeneCatalogueDuplicates"
-rm "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
+rm "workflow/out/gene_catalogues/propionate/propionate_compiled_gene_catalogue_editIDs_noDups.fa"
 
 echo "removing runIndex.smk"
 snakemake --snakefile workflow/rules/runIndex.smk --delete-all-output --cores $NUMCORES 
