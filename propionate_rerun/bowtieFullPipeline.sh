@@ -1,7 +1,7 @@
 set -euo pipefail
 
 # cute little ascii art because we deserve nice things!
-echo "             ____"
+echo "propionate   ____"
 echo "snakemake   / . .\ "
 echo "pipeline    \  ---< "
 echo "start!       \  /"
