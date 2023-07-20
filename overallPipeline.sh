@@ -2,7 +2,7 @@ echo "STARTING BUTYRATE!"
 
 cd butyrate_rerun
 
-nohup bash owtieFullPipeline.sh > butyrateOutput.txt
+nohup bash bowtieFullPipeline.sh > butyrateOutput.txt
 
 cd ..
 
