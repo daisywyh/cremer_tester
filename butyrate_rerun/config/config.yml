@@ -23,7 +23,7 @@ indexDir: "workflow/out/index"
 readsDir: "workflow/out/scratch/reads"
 
 #reads_file: "config/pract.txt"
-reads_file: "config/sra_run_accessions_Nayfach_short.txt"
+reads_file: "../sra_run_accessions_Nayfach_short.txt"
 
 #bowtieOutput: "/scratch/users/reb26/bt_output"
 bowtieOutput: "workflow/out/scratch/bt_output"
