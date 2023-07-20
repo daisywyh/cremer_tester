@@ -2,19 +2,21 @@ echo "STARTING BUTYRATE!"
 
 cd butyrate_rerun
 
-nohup bash bowtieFullPipeline.sh > butyrateOutput.txt
+nohup bash bowtieFullPipeline.sh
 
 cd ..
 
 echo "END BUTYRATE!"
 
-echo "****************************************************************"
+echo "_____________________________________________________________________"
+echo "(ﾉ^ヮ^)ﾉ*:・ﾟ✧ (ﾉ^ヮ^)ﾉ*:・ﾟ✧ (ﾉ^ヮ^)ﾉ*:・ﾟ✧ (ﾉ^ヮ^)ﾉ*:・ﾟ✧ (ﾉ^ヮ^)ﾉ*:・ﾟ✧"
+echo -e "\n"
 
 echo "START PROPIONATE"
 
 cd propionate_rerun
 
-nohup bash bowtieFullPipeline.sh > propionateOutput.txt
+nohup bash bowtieFullPipeline.sh
 
 cd ..
 
