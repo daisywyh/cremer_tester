@@ -14,7 +14,7 @@ echo "-=:___________/ "
 # read NUMCORES
 
 # default number for number of cores
-NUMCORES=6
+NUMCORES=5
 
 # FORCERUN=true
 
@@ -29,7 +29,7 @@ NUMCORES=6
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p
+snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p --rerun-incomplete
 
 # this does rule removeGeneCatalogueDupicates
 echo "________________________________________________"
