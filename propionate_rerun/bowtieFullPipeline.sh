@@ -14,7 +14,7 @@ echo "-=:___________/ "
 # read NUMCORES
 
 # default number for number of cores
-NUMCORES=5
+NUMCORES=6
 
 # FORCERUN=true
 
