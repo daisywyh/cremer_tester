@@ -29,7 +29,7 @@ NUMCORES=5
 # just do prefetch and dump
 echo "(ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ) (ಥ﹏ಥ)"
 echo "removing all files from prefetch + dump"
-snakemake --snakefile workflow/rules/prefetchDump.smk --delete-all-output --cores $NUMCORES
+snakemake --snakefile workflow/rules/prefetchDump.smk --delete-all-output --cores $NUMCORES 
 
 echo "removing the output from removeGeneCatalogueDuplicates"
 rm "workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa"
