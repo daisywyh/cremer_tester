@@ -1,9 +1,3 @@
-# Documentation for `bowtieFullPipeline.sh`
-
-This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen, which can be found here: https://github.com/rchristensen26/SCFA_geneCatalogue_readMapping_pipeline.
-
-This documentation was last updated on **21 July 2023** by **Yu Han Daisy Wang**. For any questions or issues, please contact Daisy.
-
 # Table of Contents <!-- omit in toc -->
 
 - [Documentation for `bowtieFullPipeline.sh`](#documentation-for-bowtiefullpipelinesh)
@@ -46,6 +40,13 @@ This documentation was last updated on **21 July 2023** by **Yu Han Daisy Wang**
       - [Last output file](#last-output-file-4)
   - [4. Known Issues](#4-known-issues)
   - [5. Other useful links/readings](#5-other-useful-linksreadings)
+- [Documentation for pathway abundance analysis](#documentation-for-pathway-abundance-analysis)
+
+# Documentation for `bowtieFullPipeline.sh`
+
+This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen, which can be found here: https://github.com/rchristensen26/SCFA_geneCatalogue_readMapping_pipeline.
+
+This documentation was last updated on **21 July 2023** by **Yu Han Daisy Wang**. For any questions or issues, please contact Daisy.
 
 
 ## 1. How to run this pipeline
@@ -267,5 +268,9 @@ join(config["readsDir"], "{read}.fa")
 if you're new to Snakemake, I recommend at least giving a cursory glance to the official Snakemake tutorial and documentation, which can be found here: https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html
 
 Another useful resource might be my personal lab notes, in which I go into much more detail on how I kept everything working which can be found here: https://github.com/daisywyh/DaisyCremerLabNotes
+
+# Documentation for pathway abundance analysis
+
+
 
 
