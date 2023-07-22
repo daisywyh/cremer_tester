@@ -1,48 +1,51 @@
-# Documentation for `bowtieFullPipeline.sh` <!-- omit in toc --> 
+# Documentation for `bowtieFullPipeline.sh`
 
-This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen.
+This is the documentation for the `bowtieFullPipeline.sh` pipeline. This pipeline is based on work first done by Rebecca Christensen, which can be found here: https://github.com/rchristensen26/SCFA_geneCatalogue_readMapping_pipeline.
 
-This documentation was last updated on **19 July 2023** by **Yu Han Daisy Wang**. For any questions or issues, please contact Daisy.
+This documentation was last updated on **21 July 2023** by **Yu Han Daisy Wang**. For any questions or issues, please contact Daisy.
 
-- [1. How to run this pipeline](#1-how-to-run-this-pipeline)
-  - [Setup](#setup)
-    - [How to set up the `mamba` environment](#how-to-set-up-the-mamba-environment)
-    - [How to configure filepaths](#how-to-configure-filepaths)
-  - [Running the actual pipeline](#running-the-actual-pipeline)
-- [2. How to clean up if you messed up (`bowtieFullClean.sh`)](#2-how-to-clean-up-if-you-messed-up-bowtiefullcleansh)
-- [3. A breakdown of the pipeline and its files](#3-a-breakdown-of-the-pipeline-and-its-files)
-  - [`prefetchDump.smk`](#prefetchdumpsmk)
-    - [Description](#description)
-    - [Rules](#rules)
-      - [`prefetch`](#prefetch)
-      - [`dump`](#dump)
-    - [Last output file](#last-output-file)
-  - [`removeGeneCatalogueDuplicates`](#removegenecatalogueduplicates)
-    - [Description](#description-1)
-    - [Input files](#input-files)
-    - [Last output file](#last-output-file-1)
-  - [`runIndex.smk`](#runindexsmk)
-    - [Description](#description-2)
-    - [Rules ran](#rules-ran)
-    - [Input files](#input-files-1)
-    - [Last output files](#last-output-files)
-  - [`runActualBowtie.smk`](#runactualbowtiesmk)
-    - [Description](#description-3)
-    - [Rules ran](#rules-ran-1)
-    - [Input files](#input-files-2)
-    - [Last output file](#last-output-file-2)
-  - [`summarise.smk`](#summarisesmk)
+# Table of Contents <!-- omit in toc -->
+
+- [Documentation for `bowtieFullPipeline.sh`](#documentation-for-bowtiefullpipelinesh)
+  - [1. How to run this pipeline](#1-how-to-run-this-pipeline)
+    - [Setup](#setup)
+      - [How to set up the `mamba` environment](#how-to-set-up-the-mamba-environment)
+      - [How to configure filepaths](#how-to-configure-filepaths)
+    - [Running the actual pipeline](#running-the-actual-pipeline)
+  - [2. How to clean up if you messed up (`bowtieFullClean.sh`)](#2-how-to-clean-up-if-you-messed-up-bowtiefullcleansh)
+  - [3. A breakdown of the pipeline and its files](#3-a-breakdown-of-the-pipeline-and-its-files)
+    - [`prefetchDump.smk`](#prefetchdumpsmk)
+      - [Description](#description)
+      - [Rules](#rules)
+        - [`prefetch`](#prefetch)
+        - [`dump`](#dump)
+      - [Last output file](#last-output-file)
+    - [`removeGeneCatalogueDuplicates`](#removegenecatalogueduplicates)
+      - [Description](#description-1)
+      - [Input files](#input-files)
+      - [Last output file](#last-output-file-1)
+    - [`runIndex.smk`](#runindexsmk)
+      - [Description](#description-2)
+      - [Rules ran](#rules-ran)
+      - [Input files](#input-files-1)
+      - [Last output files](#last-output-files)
+    - [`runActualBowtie.smk`](#runactualbowtiesmk)
+      - [Description](#description-3)
+      - [Rules ran](#rules-ran-1)
+      - [Input files](#input-files-2)
+      - [Last output file](#last-output-file-2)
+    - [`summarise.smk`](#summarisesmk)
       - [Description](#description-4)
       - [Rules ran](#rules-ran-2)
       - [Input files](#input-files-3)
       - [Last output file](#last-output-file-3)
-  - [`finalCleanup.smk`](#finalcleanupsmk)
-    - [Description](#description-5)
-    - [Rules ran](#rules-ran-3)
-    - [Input files](#input-files-4)
-    - [Last output file](#last-output-file-4)
-- [4. Known Issues](#4-known-issues)
-- [5. Other useful links/readings](#5-other-useful-linksreadings)
+    - [`finalCleanup.smk`](#finalcleanupsmk)
+      - [Description](#description-5)
+      - [Rules ran](#rules-ran-3)
+      - [Input files](#input-files-4)
+      - [Last output file](#last-output-file-4)
+  - [4. Known Issues](#4-known-issues)
+  - [5. Other useful links/readings](#5-other-useful-linksreadings)
 
 
 ## 1. How to run this pipeline
@@ -187,35 +190,70 @@ This runs the actual steps for sequence alignment using bowtie.
 
 #### Input files
 
-
+``` plain text
+expand(join(config["bowtieOutput"], "butyrate/butyrate_{read}_bt.sam"), read=READS),
+expand(join(config["bowtieOutputHits"],"butyrate/butyrate_{read}_bt_hits.sam"),read=READS,overall_pathway=OVERALL_PATHWAY),
+expand(join(config["hitSummaries"], "butyrate_{read}_hit_summary.json"), read=READS, overall_pathway=OVERALL_PATHWAY),
+```
 
 #### Last output file
 
+```plain text
+join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
+```
 ### `summarise.smk`
 
-##### Description
-This step takes in a list of SRA accession numbers, then uses them to download the actual reads from NCBI. 
+#### Description
 
-##### Rules ran
+This step complies the hit summaries that we got from Bowtie earlier. These output files are the most important 
 
-`prefetch`, `dump`
+#### Rules ran
 
-##### Input files
+`compileSummaries`, `writeSummaryCSV`
 
-##### Last output file
+#### Input files
+
+``` plain text
+"workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
+"workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
+
+expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
+expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY)
+```
+
+#### Last output file
+
+```plain text
+"workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+```
 
 ### `finalCleanup.smk`
 
 #### Description
-This step takes in a list of SRA accession numbers, then uses them to download the actual reads from NCBI. 
+
+This script runs some miscellaneous steps to calculate some final measures that are useful for the next steps in the analysis pathway, specifically ones regarding pathway abundance. 
 
 #### Rules ran
 
-`prefetch`, `dump`
+`countTotalReads`, `compileReadCounts`, `getGeneLengthsInCatalogue`
 
 #### Input files
 
+```plain text
+join(config["readsDir"], "{read}.fa")
+
+"workflow/out/pathway_abundance/compiled_readCounts.csv"
+
+"workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+```
+
 #### Last output file
+
+```plain text
+"workflow/out/pathway_abundance/compiled_readCounts.csv"
+
+"workflow/out/pathway_abundance/compiled_readCounts.csv"
+```
 
 ## 4. Known Issues
 
