@@ -17,7 +17,7 @@ with open(config["reads_file"], 'r') as f:
 rule all: 
     input:
         expand(join(config["sraRepo"],"{read}"),read=READS),
-        expand(join(config["readsDir"], "{read}.fa"), read = READS),
+        # expand(join(config["readsDir"], "{read}.fa"), read = READS),
 
 rule prefetch:
     params:
@@ -29,10 +29,10 @@ rule prefetch:
         prefetch {params.acc_num} -o {output}
         """
 
-rule dump:
-    input:
-        join(config["sraRepo"],"{read}")
-    output:
-        join(config["readsDir"],"{read}.fa")
-    shell:
-        "vdb-dump -f fasta {input} --output-file {output}"
+# rule dump:
+#     input:
+#         join(config["sraRepo"],"{read}")
+#     output:
+#         join(config["readsDir"],"{read}.fa")
+#     shell:
+#         "vdb-dump -f fasta {input} --output-file {output}"
