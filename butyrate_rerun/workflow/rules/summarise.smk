@@ -15,7 +15,10 @@ rule all:
         "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
 
         expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
-        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY)
+        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
+
+        expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS)
+
 
 
 # known issue
@@ -51,4 +54,15 @@ rule writeSummaryCSV:
     shell:
         """
         python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+        """
+
+rule countTotalReads:
+    input:
+        join(config["readsDir"], "{read}.fa")
+    output:
+        join(config["readCounts"], "{read}_readCount.csv")
+    shell:
+        """
+        count=$(grep ">" {input} | wc -l)
+        echo {wildcards.read}","$count >> {output}
         """

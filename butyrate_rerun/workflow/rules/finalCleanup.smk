@@ -15,21 +15,8 @@ rule all:
 
         expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
 
-rule countTotalReads:
-    input:
-        join(config["readsDir"], "{read}.fa")
-    output:
-        join(config["readCounts"], "{read}_readCount.csv")
-    shell:
-        """
-        count=$(grep ">" {input} | wc -l)
-        echo {wildcards.read}","$count >> {output}
-        """
-
-
 # try fixing this by changing the ending?
 # for f in {params.dir}/*.txt ; do cat $f ; done > {output}
-
 rule compileReadCounts:
     output:
         "workflow/out/pathway_abundance/compiled_readCounts.csv"

@@ -26,10 +26,10 @@ NUMCORES=5
 #    RUNFLAG="--forceall"
 # fi 
 
-# just do prefetch and dump
+# # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p --rerun-incomplete
+snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p
 
 echo "doing editCatalogueIDs"
 echo "note: this step is run manually as a python command I hard coded"
@@ -53,11 +53,11 @@ snakemake --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake --snakefile workflow/rules/summarise.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile workflow/rules/summarise.smk --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake --snakefile workflow/rules/finalCleanup.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile workflow/rules/finalCleanup.smk --cores $NUMCORES -p
 
 echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"

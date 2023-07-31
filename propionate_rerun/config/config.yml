@@ -1,7 +1,6 @@
-
-nucProdigalDir: "workflow/out/nucProdigalTranslation"
-nucProdigalDirwHeader: "workflow/out/nucProdigalwHeader"
-hitStrainF: "config/butyrate_hit_strains_all_pathways.txt"
+# nucProdigalDir: "workflow/out/nucProdigalTranslation"
+# nucProdigalDirwHeader: "workflow/out/nucProdigalwHeader"
+# hitStrainF: "config/butyrate_hit_strains_all_pathways.txt"
 
 # local (RC's compooter)
 
@@ -9,34 +8,58 @@ hitStrainF: "config/butyrate_hit_strains_all_pathways.txt"
 #prodigalEnv: "../../workflow/envs/prodigal_local.yml"
 
 # local (Daisy's compooter)
-strainGenomeDir: "referenceGeneFiles"
-prodigalEnv: "workflow/envs/prodigal_local.yml"
+# strainGenomeDir: "referenceGeneFiles"
+# prodigalEnv: "workflow/envs/prodigal_local.yml"
 
 # remote (RC's Sherlock)
 
 #prodigalEnv: "../../workflow/envs/prodigal.yml"
 #strainGenomeDir: "/home/groups/quacks/RC/propionate_project/main/config/strain_genomes"
 
-indexDir: "workflow/out/index"
+# for working locally
+# indexDir: "workflow/out/index"
+# for sherlock
+indexDir: propionate_rerun/workflow/out/index
 
 #readsDir: "/scratch/users/reb26/reads"
 # readsDir: "workflow/out/scratch/reads"
-readsDir: "../shared_config/out/scratch/reads"
+# for running locally/on the server
+# readsDir: "../shared_config/out/scratch/reads"
+# for running on sherlock
+readsDir: $SCRATCH/shared_output/reads
 
 #reads_file: "config/pract.txt"
-reads_file: "../shared_config/incomplete_sra_run_accessions_Nayfach.txt"
+# for running locally/on the server
+# reads_file: "../shared_config/sra_run_accessions_Nayfach_short.txt"
+# for running on sherlock
+reads_file: shared_config/sra_run_accessions_Nayfach_short.txt
 
 #bowtieOutput: "/scratch/users/reb26/bt_output"
-bowtieOutput: "workflow/out/scratch/bt_output"
+# the one below is for running locally/in the server
+# bowtieOutput: "workflow/out/scratch/bt_output"
+# this is for sherlock
+bowtieOutput: propionate_rerun/workflow/out/bt_output
 
 #bowtieOutputHits: "/scratch/users/reb26/bt_hits"
-bowtieOutputHits: "workflow/out/scratch/bt_hits"
+# this is for running locally/ in the server
+# bowtieOutputHits: "workflow/out/scratch/bt_hits"
+# this is for running on sherlock
+bowtieOutputHits: propionate_rerun/workflow/out/bt_hits
 
 #sraRepo: "/scratch/users/reb26/prefetched"
 # sraRepo: "workflow/out/scratch/prefetched"
-sraRepo: "../shared_config/out/scratch/prefetched"
+# for running locally/on the server
+# sraRepo: "../shared_config/out/scratch/prefetched"
+# for running on sherlock
+sraRepo: $SCRATCH/shared_output/prefetched
 
-hitSummaries: "workflow/out/bt_hit_summaries"
+# for running locally
+# hitSummaries: "workflow/out/bt_hit_summaries"
+# for sherlock
+hitSummaries: propionate_rerun/workflow/out/bt_hit_summaries
 
 #readCounts: "/scratch/users/reb26/readCounts"
-readCounts: "workflow/out/readCounts"
+# for local
+# readCounts: "workflow/out/readCounts"
+# for sherlock
+readCounts: propionate_rerun/workflow/out/readCounts

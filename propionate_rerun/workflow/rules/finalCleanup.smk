@@ -26,7 +26,6 @@ rule countTotalReads:
         echo {wildcards.read}","$count >> {output}
         """
 
-
 # try fixing this by changing the ending?
 # for f in {params.dir}/*.txt ; do cat $f ; done > {output}
 
