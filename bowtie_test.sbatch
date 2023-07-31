@@ -9,9 +9,9 @@
 module load python/3.9.0
 module load matplotlib
 module load biology
-module load bowtie2/2.3.4.1
-module load samtools/1.16.1
-module load sra-tools/2.11.0
+module load bowtie2
+module load samtools
+module load sra-tools
 pip install snakemake --user
 
 bash overallPipeline.sh
