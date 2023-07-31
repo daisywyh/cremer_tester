@@ -29,35 +29,35 @@ NUMCORES=5
 # # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile workflow/rules/prefetchDump.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p
 
 echo "doing editCatalogueIDs"
 echo "note: this step is run manually as a python command I hard coded"
-python3 workflow/scripts/edit_catalog_id.py "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue.fa" "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs.fa"
+python3 propionate_rerun/workflow/scripts/edit_catalog_id.py "propionate_rerun/workflow/out/gene_catalogues/propionate_compiled_gene_catalogue.fa" "propionate_rerun/workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs.fa"
 
 # this does rule removeGeneCatalogueDupicates
 echo "________________________________________________"
 echo "doing removeGeneCatalogueDuplicates"
 echo "note: this step is run manually as a shell command I hard coded"
-awk '/^>/{f=!d[$1];d[$1]=1}f' "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs.fa" > "workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs_noDups.fa"
+awk '/^>/{f=!d[$1];d[$1]=1}f' "propionate_rerun/workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs.fa" > "propionate_rerun/workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs_noDups.fa"
 
 echo "________________________________________________"
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
-snakemake --snakefile workflow/rules/runIndex.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/runIndex.smk --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile workflow/rules/runActualBowtie.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/runActualBowtie.smk --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake --forcerun --snakefile workflow/rules/summarise.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile propionate_rerun/workflow/rules/summarise.smk --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake --forcerun --snakefile workflow/rules/finalCleanup.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile propionate_rerun/workflow/rules/finalCleanup.smk --cores $NUMCORES -p
 
 echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
