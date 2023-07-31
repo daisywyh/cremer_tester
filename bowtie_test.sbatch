@@ -7,7 +7,6 @@
 
 # load all of the needed package
 module load python/3.9.0
-module load matplotlib
 module load biology
 module load bowtie2
 module load samtools
