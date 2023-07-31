@@ -29,7 +29,7 @@ NUMCORES=5
 # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile butyrate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p
+snakemake --snakefile butyrate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p --latency-wait
 
 # this does rule removeGeneCatalogueDupicates
 echo "________________________________________________"

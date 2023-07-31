@@ -17,7 +17,7 @@ with open(config["reads_file"], 'r') as f:
 rule all: 
     input:
         expand(join(config["sraRepo"],"{read}"),read=READS),
-        expand(join(config["readsDir"], "{read}.fa"), read = READS),
+        expand(join(config["readsDir"], "{read}.fa"), read=READS),
 
 rule prefetch:
     params:
