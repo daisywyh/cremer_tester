@@ -1,7 +1,7 @@
 from os.path import join
 import os
 
-configfile: "config/config.yml"
+configfile: "butyrate_rerun/config/config.yml"
 
 with open(config["reads_file"], 'r') as f:
     READS = f.read().split()
