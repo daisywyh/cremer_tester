@@ -1,6 +1,6 @@
 echo "STARTING BUTYRATE!"
 
-nohup bash bowtieFullPipeline.sh
+nohup bash butyrate_rerun/bowtieFullPipeline.sh
 
 echo "END BUTYRATE!"
 
@@ -12,7 +12,7 @@ echo -e "\n"
 
 echo "START PROPIONATE"
 
-nohup bash bowtieFullPipeline.sh
+nohup bash propionate_rerun/bowtieFullPipeline.sh
 
 echo "END PROPIONATE. EVERYTHING IS COMPLETED"
 echo "＼＼\\٩(˃̶͈̀௰˂̶͈́)و //／／"
