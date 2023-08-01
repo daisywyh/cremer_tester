@@ -29,7 +29,7 @@ NUMCORES=5
 # # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile propionate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p --latency-wait 120
+snakemake --snakefile propionate_rerun/workflow/rules/prefetchDump.smk --slurm --cores $NUMCORES -p --latency-wait 120
 
 echo "doing editCatalogueIDs"
 echo "note: this step is run manually as a python command I hard coded"
@@ -45,19 +45,19 @@ echo "________________________________________________"
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
-snakemake --snakefile propionate_rerun/workflow/rules/runIndex.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/runIndex.smk --slurm --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile propionate_rerun/workflow/rules/runActualBowtie.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/runActualBowtie.smk --slurm --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
-snakemake --forcerun --snakefile propionate_rerun/workflow/rules/summarise.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile propionate_rerun/workflow/rules/summarise.smk --slurm --cores $NUMCORES -p
 
 echo "________________________________________________"
 echo "run finalCleanup.smk ｡+.｡☆ﾟ:;｡+ﾟ ☆*ﾟ¨ﾟﾟ･*:..ﾞ((ε(*⌒▽⌒)†"
-snakemake --forcerun --snakefile propionate_rerun/workflow/rules/finalCleanup.smk --cores $NUMCORES -p
+snakemake --forcerun --snakefile propionate_rerun/workflow/rules/finalCleanup.smk --slurm --cores $NUMCORES -p
 
 echo "BOWTIE PIPELINE DONE! ＼＼\(۶•̀ᴗ•́)۶//／／"
 echo "୧(๑•̀ヮ•́)૭ LET'S GO!"
