@@ -12,6 +12,7 @@ module load system openssl
 module load bowtie2
 module load samtools
 module load sra-tools
+module load py-biopython/1.79_py39 
 pip install snakemake --user
 
 bash overallPipeline.sh
