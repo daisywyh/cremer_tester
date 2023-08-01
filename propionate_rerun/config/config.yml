@@ -26,7 +26,7 @@ indexDir: propionate_rerun/workflow/out/index
 # for running locally/on the server
 # readsDir: "../shared_config/out/scratch/reads"
 # for running on sherlock
-readsDir: $SCRATCH/shared_output/reads
+readsDir: /scratch/users/daisywyh/shared_output/reads
 
 #reads_file: "config/pract.txt"
 # for running locally/on the server
@@ -51,7 +51,9 @@ bowtieOutputHits: propionate_rerun/workflow/out/bt_hits
 # for running locally/on the server
 # sraRepo: "../shared_config/out/scratch/prefetched"
 # for running on sherlock
-sraRepo: $SCRATCH/shared_output/prefetched
+# known bug: using the $SCRATCH variable seems to cause issues
+# fix: type out the full path manually
+sraRepo: /scratch/users/daisywyh/shared_output/prefetched
 
 # for running locally
 # hitSummaries: "workflow/out/bt_hit_summaries"
