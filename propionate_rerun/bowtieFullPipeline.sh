@@ -29,7 +29,7 @@ NUMCORES=5
 # # just do prefetch and dump
 echo "doing prefetch + dump"
 echo "this might take a while ... (ಥ﹏ಥ)"
-snakemake --snakefile propionate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p --latency-wait
+snakemake --snakefile propionate_rerun/workflow/rules/prefetchDump.smk --cores $NUMCORES -p --latency-wait 120
 
 echo "doing editCatalogueIDs"
 echo "note: this step is run manually as a python command I hard coded"
