@@ -11,9 +11,9 @@ PATHWAY = ["propionate_rerun"]
 
 rule all:
     input:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv",
+        "propionate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv",
 
-        expand("workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
+        expand("propionate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
 
 rule countTotalReads:
     input:
@@ -31,7 +31,7 @@ rule countTotalReads:
 
 rule compileReadCounts:
     output:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv"
+        "propionate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv"
     params:
         dir=(join(config["readCounts"]))
     shell:
@@ -42,14 +42,14 @@ rule compileReadCounts:
 # # known issue -> fix by putting correct filepath
 rule getGeneLengthsInCatalogue:
     input:
-       "workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+       "propionate_rerun/workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
 
     output:
-        "workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
+        "propionate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
 
     shell:
         # fixed this because it seems like it's the wrong filepath??
-        #python3 workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
+        #python3 propionate_rerun/workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
         """
-        python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
+        python3 propionate_rerun/workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
         """

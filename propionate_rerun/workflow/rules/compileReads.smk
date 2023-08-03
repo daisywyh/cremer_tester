@@ -11,14 +11,14 @@ OVERALL_PATHWAY = 'propionate'
 
 rule all:
     input:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv",
+        "propionate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv",
 
 # try fixing this by changing the ending?
 # for f in {params.dir}/*.txt ; do cat $f ; done > {output}
 
 rule compileReadCounts:
     output:
-        "workflow/out/pathway_abundance/compiled_readCounts.csv"
+        "propionate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv"
     params:
         dir=(join(config["readCounts"]))
     shell:

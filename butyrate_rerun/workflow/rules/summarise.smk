@@ -11,11 +11,11 @@ OVERALL_PATHWAY = 'butyrate"'
 
 rule all:
     input:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
+        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
+        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
 
-        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
-        expand("workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
+        expand("butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
+        expand("butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS)
 
@@ -23,10 +23,10 @@ rule all:
 
 # known issue
 # need to put in pathway_abundance for this to work
-#"workflow/out/compiled_bt_hit_summaries.txt"
+#"butyrate_rerun/workflow/out/compiled_bt_hit_summaries.txt"
 rule compileSummaries:
     output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     params:
         dir = (join(config["hitSummaries"]))
@@ -40,16 +40,16 @@ rule compileSummaries:
 # # just forgot to put in the directory
 # # this should be the correct version?
 
-#"workflow/out/compiled_bt_hit_summaries.txt"
+#"butyrate_rerun/workflow/out/compiled_bt_hit_summaries.txt"
 
-#"workflow/out/compiled_bt_hit_summaries.csv"
+#"butyrate_rerun/workflow/out/compiled_bt_hit_summaries.csv"
 
 rule writeSummaryCSV:
     input:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     output:
-        "workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
     shell:
         """
