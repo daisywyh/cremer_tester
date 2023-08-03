@@ -21,6 +21,8 @@ rule all:
 
 
 # overall_pathway is still `propionate/propionate`
+
+# note from running on sherlock: the overall pathway is still propionate/propionate 
 rule buildIndex:
     input:
         "workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
