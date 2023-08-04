@@ -19,7 +19,7 @@
 # for working locally
 # indexDir: "workflow/out/index"
 # for sherlock
-indexDir: /home/users/daisywyh/butyrate_rerun/workflow/out/index
+indexDir: butyrate_rerun/workflow/out/index
 
 #readsDir: "/scratch/users/reb26/reads"
 # readsDir: "workflow/out/scratch/reads"
