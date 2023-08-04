@@ -14,7 +14,6 @@ rule all:
         join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
 
         "butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
-        "butyrate_rerun/workflow/out/gene_catalogues/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
         "butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
