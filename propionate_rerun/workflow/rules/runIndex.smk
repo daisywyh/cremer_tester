@@ -14,7 +14,6 @@ rule all:
         join(config["indexDir"], "propionate/propionate_gene_catalogue.1.bt2"),
 
         "propionate_rerun/workflow/out/gene_catalogues/propionate/propionate_compiled_gene_catalogue_editIDs.fa",
-        "propionate_rerun/workflow/out/gene_catalogues/propionate_compiled_gene_catalogue_editIDs_noDups.fa",
         "propionate_rerun/workflow/out/gene_catalogues/propionate/propionate_compiled_gene_catalogue_editIDs_noDups.fa",
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
