@@ -41,7 +41,7 @@ echo "________________________________________________"
 echo "run runIndex.smk"
 echo "making the Bowtie index! (♡-_-♡)"
 echo "this might also take a while ... (ಥ﹏ಥ)"                                                                                                                                                                                                                         
-snakemake --snakefile butyrate_rerun/workflow/rules/runIndex.smk --cores $NUMCORES -p
+snakemake --snakefile butyrate_rerun/workflow/rules/runIndex.smk --cores $NUMCORES -p --latency-wait 120
 
 echo "________________________________________________"
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
