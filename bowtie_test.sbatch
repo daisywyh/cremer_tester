@@ -8,6 +8,7 @@
 # load all of the needed packages
 module load system openssl
 module load python/3.9.0
+module load py-pandas/2.0.1_py39
 module load biology
 module load bowtie2
 module load samtools
