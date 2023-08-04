@@ -39,5 +39,5 @@ rule getGeneLengthsInCatalogue:
         # fixed this because it seems like it's the wrong filepath??
         #python3 butyrate_rerun/workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
         """
-        python3 workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
+        python3 butyrate_rerun/workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
         """

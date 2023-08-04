@@ -24,7 +24,7 @@ rule runBowtie:
         index_name=lambda w: {w.overall_pathway}
     shell:
         """
-        bowtie2 --very-sensitive --end-to-end -x workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+        bowtie2 --very-sensitive --end-to-end -x butyrate_rerun/workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
         """
 
 rule filterBowtieOutput:
@@ -44,5 +44,5 @@ rule summarizeHits:
         join(config["hitSummaries"], "{overall_pathway}_{read}_hit_summary.json")
     shell:
         """
-        python3 workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
+        python3 butyrate_rerun/workflow/scripts/summarize_hits.py {input} {output} {wildcards.overall_pathway} {wildcards.read}
         """
