@@ -24,7 +24,7 @@ rule compileNucProdigal:
     input:
         expand(join(config["nucProdigalDirwHeader"],"{hit_strain}_prodigal_nuc_addHeader.fna"), hit_strain=HIT_STRAINS)
     output:
-        "workflow/out/compiled_nuc_prodigal_translation_hit_strains.fna"
+        "propionate_rerun/workflow/out/compiled_nuc_prodigal_translation_hit_strains.fna"
     params:
         input_dir=config["nucProdigalDirwHeader"]
     shell:
@@ -34,10 +34,10 @@ rule compileNucProdigal:
 
 rule makeGeneCatalogue:
     input:
-        compiled_fasta_f="workflow/out/compiled_nuc_prodigal_translation_hit_strains.fna",
+        compiled_fasta_f="propionate_rerun/workflow/out/compiled_nuc_prodigal_translation_hit_strains.fna",
         strain_hits_csv_f="config/{pathway}/0.75scoreFilter_nGenes_{pathway}_HMMER_hits.csv"
     output:
-        "workflow/out/{pathway}/{pathway}_{gene}_catalogue.faa"
+        "propionate_rerun/workflow/out/{pathway}/{pathway}_{gene}_catalogue.faa"
     shell:
         """
         python3 workflow/scripts/make_gene_catalogue.py {input.compiled_fasta_f} {input.strain_hits_csv_f} {output} {wildcards.gene}
@@ -45,9 +45,9 @@ rule makeGeneCatalogue:
 
 rule compileGeneCatalogue:
     input:
-        expand("workflow/out/{pathway}/{pathway}_{gene}_catalogue.faa", pathway=PATHWAY, gene=GENES)
+        expand("propionate_rerun/workflow/out/{pathway}/{pathway}_{gene}_catalogue.faa", pathway=PATHWAY, gene=GENES)
     output:
-        "workflow/out/compiled_pathway_catalogues/compiled_{pathway}_catalogue.faa"
+        "propionate_rerun/workflow/out/compiled_pathway_catalogues/compiled_{pathway}_catalogue.faa"
     shell:
         """
         cat {input} > {output}

@@ -53,7 +53,7 @@ rule writeSummaryCSV:
 
     shell:
         """
-        python3 workflow/scripts/write_hit_summary_csv.py {input} {output}
+        python3 butyrate_rerun/workflow/scripts/write_hit_summary_csv.py {input} {output}
         """
 
 rule countTotalReads:
