@@ -32,7 +32,7 @@ readsDir: /scratch/users/daisywyh/shared_output/reads
 # for running locally/on the server
 # reads_file: "../shared_config/sra_run_accessions_Nayfach_short.txt"
 # for running on sherlock
-reads_file: /home/users/daisywyh/shared_config/sra_run_accessions_Nayfach_short.txt
+reads_file: shared_config/sra_run_accessions_Nayfach_short.txt
 
 #bowtieOutput: "/scratch/users/reb26/bt_output"
 # the one below is for running locally/in the server
