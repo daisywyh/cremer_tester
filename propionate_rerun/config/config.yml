@@ -19,7 +19,7 @@
 # for working locally
 # indexDir: "workflow/out/index"
 # for sherlock
-indexDir: /home/users/daisywyh/workflow/out/index
+indexDir: /home/users/daisywyh/propionate_rerun/workflow/out/index
 
 #readsDir: "/scratch/users/reb26/reads"
 # readsDir: "workflow/out/scratch/reads"
@@ -38,13 +38,13 @@ reads_file: shared_config/sra_run_accessions_Nayfach_short.txt
 # the one below is for running locally/in the server
 # bowtieOutput: "workflow/out/scratch/bt_output"
 # this is for sherlock
-bowtieOutput: /home/users/daisywyh/workflow/out/bt_output
+bowtieOutput: /home/users/daisywyh/propionate_rerun/workflow/out/bt_output
 
 #bowtieOutputHits: "/scratch/users/reb26/bt_hits"
 # this is for running locally/ in the server
 # bowtieOutputHits: "workflow/out/scratch/bt_hits"
 # this is for running on sherlock
-bowtieOutputHits: /home/users/daisywyh/workflow/out/bt_hits
+bowtieOutputHits: /home/users/daisywyh/propionate_rerun/workflow/out/bt_hits
 
 #sraRepo: "/scratch/users/reb26/prefetched"
 # sraRepo: "workflow/out/scratch/prefetched"
@@ -58,10 +58,10 @@ sraRepo: /scratch/users/daisywyh/shared_output/prefetched
 # for running locally
 # hitSummaries: "workflow/out/bt_hit_summaries"
 # for sherlock
-hitSummaries: /home/users/daisywyh/workflow/out/bt_hit_summaries
+hitSummaries: /home/users/daisywyh/propionate_rerun/workflow/out/bt_hit_summaries
 
 #readCounts: "/scratch/users/reb26/readCounts"
 # for local
 # readCounts: "workflow/out/readCounts"
 # for sherlock
-readCounts: /home/users/daisywyh/workflow/out/readCounts
+readCounts: /home/users/daisywyh/propionate_rerun/workflow/out/readCounts
