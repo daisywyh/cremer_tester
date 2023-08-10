@@ -19,7 +19,7 @@
 # for working locally
 # indexDir: "workflow/out/index"
 # for sherlock
-indexDir: cremer_tester/butyrate_rerun/workflow/out/index
+indexDir: /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/index
 
 #readsDir: "/scratch/users/reb26/reads"
 # readsDir: "workflow/out/scratch/reads"
@@ -62,4 +62,4 @@ hitSummaries: cremer_tester/butyrate_rerun/workflow/out/bt_hit_summaries
 # for local
 # readCounts: "workflow/out/readCounts"
 # for sherlock
-readCounts: /home/usersbutyrate_rerun/workflow/out/readCounts
+readCounts: /home/users/daisywyh/butyrate_rerun/workflow/out/readCounts
