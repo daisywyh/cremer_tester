@@ -13,8 +13,8 @@ rule all:
     input:
         join(config["indexDir"], "butyrate/butyrate_gene_catalogue.1.bt2"),
 
-        "butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
-        "butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs.fa",
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/gene_catalogues/butyrate/butyrate_compiled_gene_catalogue_editIDs_noDups.fa",
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS),
 
@@ -22,14 +22,14 @@ rule all:
 # overall_pathway is still `butyrate/butyrate`
 rule buildIndex:
     input:
-        "cremer_tester/butyrate_rerun/workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/gene_catalogues/{overall_pathway}_compiled_gene_catalogue_editIDs_noDups.fa"
     params:
         index_name=lambda w: {w.overall_pathway}
     output:
         join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
     shell:
         """
-        bowtie2-build -f {input} cremer_tester/butyrate_rerun/workflow/out/index/{params.index_name}_gene_catalogue
+        bowtie2-build -f {input} /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/index/{params.index_name}_gene_catalogue
         """
 
 rule countTotalReads:

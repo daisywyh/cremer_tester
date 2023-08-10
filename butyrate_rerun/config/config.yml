@@ -62,4 +62,4 @@ hitSummaries: cremer_tester/butyrate_rerun/workflow/out/bt_hit_summaries
 # for local
 # readCounts: "workflow/out/readCounts"
 # for sherlock
-readCounts: cremer_tester/butyrate_rerun/workflow/out/readCounts
+readCounts: /home/usersbutyrate_rerun/workflow/out/readCounts
