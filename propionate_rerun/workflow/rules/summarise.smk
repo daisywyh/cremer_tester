@@ -11,11 +11,11 @@ OVERALL_PATHWAY = 'propionate'
 
 rule all:
     input:
-        "propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.txt",
-        "propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.csv",
+        "/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.txt",
+        "/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_propionate_rerun.csv",
 
-        expand("propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
-        expand("propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
+        expand("/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
+        expand("/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS)
 
@@ -26,7 +26,7 @@ rule all:
 #"propionate_rerun/workflow/out/compiled_bt_hit_summaries.txt"
 rule compileSummaries:
     output:
-        "propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     params:
         dir = (join(config["hitSummaries"]))
@@ -46,14 +46,14 @@ rule compileSummaries:
 
 rule writeSummaryCSV:
     input:
-        "propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     output:
-        "propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+        "/home/users/daisywyh/cremer_tester/propionate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
     shell:
         """
-        python3 propionate_rerun/workflow/scripts/write_hit_summary_csv.py {input} {output}
+        python3 /home/users/daisywyh/cremer_tester/propionate_rerun/workflow/scripts/write_hit_summary_csv.py {input} {output}
         """
 
 rule countTotalReads:
