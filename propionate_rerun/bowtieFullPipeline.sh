@@ -51,7 +51,7 @@ snakemake --snakefile propionate_rerun/workflow/rules/runIndex.smk --cores $NUMC
 
 echo "________________________________________________"
 echo "run runActualBowtie.smk ((ε(*´･ω･)っ†*ﾟ¨ﾟﾟ･*:..☆"
-snakemake --snakefile propionate_rerun/workflow/rules/runActualBowtie.smk --cores $NUMCORES -p
+snakemake --snakefile propionate_rerun/workflow/rules/runActualBowtie.smk --cores $NUMCORES -p --rerun-incomplete
 
 echo "________________________________________________"
 echo "run summarise.smk ᕕ(⌐■_■)ᕗ ♪♬"
