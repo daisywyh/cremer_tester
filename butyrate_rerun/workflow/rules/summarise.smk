@@ -11,11 +11,11 @@ OVERALL_PATHWAY = 'butyrate"'
 
 rule all:
     input:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.txt",
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_butyrate_rerun.csv",
 
-        expand("butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
-        expand("butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
+        expand("/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.txt", pathway=PATHWAY),
+        expand("/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{pathway}.csv", pathway=PATHWAY),
 
         expand(join(config["readCounts"],"{read}_readCount.csv"), read=READS)
 
@@ -26,7 +26,7 @@ rule all:
 #"butyrate_rerun/workflow/out/compiled_bt_hit_summaries.txt"
 rule compileSummaries:
     output:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     params:
         dir = (join(config["hitSummaries"]))
@@ -46,14 +46,14 @@ rule compileSummaries:
 
 rule writeSummaryCSV:
     input:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.txt"
 
     output:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_bt_hit_summaries_{overall_pathway}.csv"
 
     shell:
         """
-        python3 butyrate_rerun/workflow/scripts/write_hit_summary_csv.py {input} {output}
+        python3 /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/scripts/write_hit_summary_csv.py {input} {output}
         """
 
 rule countTotalReads:

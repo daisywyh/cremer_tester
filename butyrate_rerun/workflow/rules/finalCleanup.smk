@@ -11,15 +11,15 @@ PATHWAY = ["butyrate_rerun"]
 
 rule all:
     input:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv",
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv",
 
-        expand("butyrate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
+        expand("/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv", pathway = PATHWAY)
 
 # try fixing this by changing the ending?
 # for f in {params.dir}/*.txt ; do cat $f ; done > {output}
 rule compileReadCounts:
     output:
-        "butyrate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/compiled_readCounts.csv"
     params:
         dir=(join(config["readCounts"]))
     shell:
@@ -30,14 +30,14 @@ rule compileReadCounts:
 # # known issue -> fix by putting correct filepath
 rule getGeneLengthsInCatalogue:
     input:
-       "butyrate_rerun/workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
+       "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/gene_catalogues/{pathway}_compiled_gene_catalogue.fa"
 
     output:
-        "butyrate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
+        "/home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/pathway_abundance/{pathway}_gene_catalogue_seqlengths.csv"
 
     shell:
         # fixed this because it seems like it's the wrong filepath??
-        #python3 butyrate_rerun/workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
+        #python3 /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/scripts/gene_catalogue_seqlenths.py {input} {output}
         """
-        python3 butyrate_rerun/workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
+        python3 /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/scripts/gene_catalogue_seqlengths.py {input} {output}
         """
