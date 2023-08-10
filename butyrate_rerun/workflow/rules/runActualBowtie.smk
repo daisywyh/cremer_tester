@@ -24,7 +24,7 @@ rule runBowtie:
         index_name=lambda w: {w.overall_pathway}
     shell:
         """
-        bowtie2 --very-sensitive --end-to-end -x butyrate_rerun/workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
+        bowtie2 --very-sensitive --end-to-end -x cremer_tester/butyrate_rerun/workflow/out/index/{params.index_name}/{params.index_name}_gene_catalogue -f -U {input.reads} -S {output}
         """
 
 rule filterBowtieOutput:
