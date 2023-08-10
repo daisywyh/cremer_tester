@@ -29,7 +29,7 @@ rule buildIndex:
         join(config["indexDir"], "{overall_pathway}_gene_catalogue.1.bt2")
     shell:
         """
-        bowtie2-build -f {input} join(config["indexDir], "overall_pathway}_gene_catalogue")
+        bowtie2-build -f {input} join(config["indexDir], "{overall_pathway}_gene_catalogue")
         """
                 # cremer_tester/butyrate_rerun/workflow/out/index/{params.index_name}_gene_catalogue
 
