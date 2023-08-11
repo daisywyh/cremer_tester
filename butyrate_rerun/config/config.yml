@@ -38,7 +38,8 @@ reads_file: shared_config/sra_run_accessions_Nayfach_short.txt
 # the one below is for running locally/in the server
 # bowtieOutput: "workflow/out/scratch/bt_output"
 # this is for sherlock
-bowtieOutput: /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/bt_output
+# bowtieOutput: /home/users/daisywyh/cremer_tester/butyrate_rerun/workflow/out/bt_output
+bowtieOutput: /scratch/users/daisywyh/butyrate_rerun/bt_output
 
 #bowtieOutputHits: "/scratch/users/reb26/bt_hits"
 # this is for running locally/ in the server
